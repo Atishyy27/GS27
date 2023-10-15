@@ -1,0 +1,28 @@
+general
+heador
+    contribute to us
+footer
+    contact developer
+        (throw linkedin, github) //not very much recomended
+bg
+    GSthetics
+
+page 1 (landing page)
+    choose your sem
+        phy
+            redirect to phy sem page
+
+        chem
+            redirect to chem sem page
+
+page 2 (primary page) (any sem)
+    select subject
+        sub1(subject name)
+            MST pyqs
+            books as per teachers
+            notes (coming soon)
+
+        sub2(subject name) 
+        sub3(subject name)  
+        sub4(subject name) 
+        sub5(subject name) 
