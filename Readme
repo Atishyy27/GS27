@@ -4,4 +4,9 @@ It's a public display website, curretly widespread upto all freshers of Shri G.S
 The website caters entire material that a student may require to excel in the college exams, though we dont gurantees you as the final result is solely dependent on how one performed in the exam.
 
 Structure
-The
+The website runs on a very basic HTML, CSS and js file.
+the main index contains two anchor, physics(for physics sem) and chem(for chem sem)
+The sem page contains entire data as table, either in textual form or proceeds to extrnal google drive link, containg the required media.
+
+AIM
+the aim of this website is to provide every student a better learning environment and resources.
