@@ -1,6 +1,26 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+span {
+    display: inline-block;
+    font-family: "Monument Extended";
+    font-weight: 300;
+    color: #fff;
+    font-size: 36px;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: transform 0.1s linear;
+}
+header img {
+    height: 3px; /* Adjust the height as needed */
+    margin-left: 10px; /* Add some spacing to the left of the image */
+}
+
 body {
-    background: linear-gradient(135deg, #3498db, #1abc9c);
-    background-size: 400% 400%;
+    background: radial-gradient( #b9540b, #1a45bc);
+    background-size: 40% 400%;
     animation: gradient 15s infinite;
     color: #fff;
     font-family: Arial, sans-serif;
@@ -16,35 +36,31 @@ body {
 
 
 @keyframes gradient {
-    0% {
+0% {    
         background-position: 0 0;
     }
-    100% {
+    10% {
         background-position: 100% 100%;
     }
 }
 
-header {
-    background-color: #354db2;
-    color: #fff;
-    padding: 5px 0; /* Reduced padding */
-    width: 100%;
-    position:fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-/* Style the H1 element */
 h1 {
     font-size: 36px;
     text-transform: uppercase;
     margin-top: 20px;
 }
 
-/* Style buttons */
+.glass{
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(245, 5, 5, 0));
+    backdrop-filter: blur(1000px);
+    padding: 80px;
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
 button {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-    color: #ff6208;
+    color: #0b2f6a;
     font-size: 24px;
     padding: 20px 40px;
     border: none;
@@ -52,20 +68,75 @@ button {
     margin: 10px 0;
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 button:hover {
-    background: #ff6208;
-    color: #fff;
+    background: rgb(71, 8, 75);
+    color: #ffffff;
 }
 
-footer {
-    background-color: #354db2;
+header {
+    background: linear-gradient(135deg, #0e7149, #243853);
     color: #fff;
-    padding: 10px 0;
+    font-size: large;
+    padding: 1px 0;
     width: 100%;
     position: fixed;
-    bottom: 0; /* Fix it to the bottom */
+    top: 0;
     left: 0;
     right: 0;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    z-index: 1;
 }
+
+header a {
+    color: #ffc800; 
+    padding: 10px; 
+}
+
+header img {
+    height: 43px; 
+    margin-left: 10px; 
+}
+
+/* Style the footer */
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #0e7131, #2e2453);
+    color: #fff;
+    padding: 10px;
+    font-size:large;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Style the footer image */
+footer img {
+    height: 20px;
+    margin-left: 0px;
+    margin-bottom: -4px;
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+    /* Your styles here */
+    body {
+      font-size: 14px;
+    }
+    .container {
+      width: 90%;
+    }
+    /* Add more styles as needed */
+  }
+  
