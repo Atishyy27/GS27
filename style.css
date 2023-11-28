@@ -18,6 +18,25 @@ header img {
     margin-left: 10px; /* Add some spacing to the left of the image */
 }
 
+img {
+    backdrop-filter:;
+}
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+.content {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+  }
+
 body {
     background: radial-gradient( #b9540b, #1a45bc);
     background-size: 40% 400%;
@@ -35,15 +54,6 @@ body {
 }
 
 
-@keyframes gradient {
-0% {    
-        background-position: 0 0;
-    }
-    10% {
-        background-position: 100% 100%;
-    }
-}
-
 h1 {
     font-size: 36px;
     text-transform: uppercase;
@@ -52,13 +62,16 @@ h1 {
 
 .glass{
     background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(245, 5, 5, 0));
-    backdrop-filter: blur(1000px);
-    padding: 80px;
+    backdrop-filter: blur(4px);
+    padding-top: 10%;
+    padding-left: 100%;
+    padding-right: 100%;
     -webkit-backdrop-filter: blur(10px);
     border-radius: 12px;
     border:1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
 button {
     color: #0b2f6a;
     font-size: 24px;
@@ -67,13 +80,13 @@ button {
     border-radius: 5px;
     margin: 10px 0;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.5s, color 0.3s;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 button:hover {
