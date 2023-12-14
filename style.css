@@ -13,14 +13,8 @@ span {
     pointer-events: none;
     transition: transform 0.1s linear;
 }
-header img {
-    height: 3px; /* Adjust the height as needed */
-    margin-left: 10px; /* Add some spacing to the left of the image */
-}
 
-img {
-    backdrop-filter:;
-}
+
 #myVideo {
     position: fixed;
     right: 0;
@@ -94,20 +88,29 @@ button:hover {
     color: #ffffff;
 }
 
+header img {
+    height: 3px;
+    margin-left: 10px;
+}
+
 header {
-    background: linear-gradient(135deg, #0e7149, #243853);
-    color: #fff;
-    font-size: large;
-    padding: 1px 0;
+    padding: 50px 150px;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    width: 100%;
     display: flex;
-    justify-content:center;
+    justify-content:space-between;
     align-items: center;
-    z-index: 1;
+    z-index: 100;
+}
+
+.home {
+    font-size: 30px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
 }
 
 header a {
