@@ -1,19 +1,23 @@
 @import "tailwindcss";
 
-:root {
-  --background: #0e0f13;
-  --foreground: #f2f2f2;
+/* Design tokens. Use these Tailwind names everywhere: bg, fg, card, dim, faint, accent, good. */
+@theme {
+  --color-bg: #0e0f13;
+  --color-fg: #f2f2f2;
+  --color-card: #16181e;
+  --color-dim: #9a9ca6;
+  --color-faint: #6b6f7b;
+  --color-accent: #ff5a36;
+  --color-good: #3dd68c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-bg);
+  color: var(--color-fg);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }

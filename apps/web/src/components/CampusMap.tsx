@@ -36,6 +36,8 @@ export default function CampusMap() {
       attributionControl: { compact: true },
     });
     map.current = m;
+    m.on("error", (e) => console.error("map error", e.error?.message));
+    (window as unknown as { __map: MLMap }).__map = m;
     m.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-right");
 
     m.on("load", async () => {
@@ -94,9 +96,9 @@ export default function CampusMap() {
 
   return (
     <div className="relative h-[100svh] w-full overflow-hidden">
-      <div ref={box} className="absolute inset-0" />
+      <div ref={box} style={{ position: "absolute", inset: 0 }} />
 
-      <div className="pointer-events-none absolute left-4 top-4 max-w-md sm:left-8 sm:top-8">
+      <div className="pointer-events-none absolute left-4 top-20 max-w-md sm:left-8 sm:top-24">
         <p className="text-xs font-bold tracking-[0.2em] text-[#ff5a36]">SGSITS INDORE</p>
         <h1 className="mt-2 text-5xl font-extrabold leading-none sm:text-7xl">GS27</h1>
         <p className="mt-3 text-sm text-[#9a9ca6] sm:text-base">
