@@ -65,7 +65,7 @@ table.t td{padding:12px 16px;border-bottom:1px solid #1a1c22} table.t tr:nth-chi
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
 <script>Reveal.initialize({width:1280,height:720,margin:0.03,center:false,hash:true,slideNumber:"c/t",transition:"fade",
-keyboardCondition:"focused",plugins:[RevealNotes]});
+keyboardCondition:"focused",plugins:[RevealNotes]}).then(function(){if(!location.hash||location.hash==="#/")Reveal.slide(2);});
 document.addEventListener("keydown",e=>{if(["INPUT","SELECT"].includes(document.activeElement.tagName))e.stopPropagation();},true);
 
 const TARGET = {3: 200, 4: 350, 5: 600, 7: 900};
