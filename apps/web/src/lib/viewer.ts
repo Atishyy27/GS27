@@ -9,6 +9,8 @@ export type Profile = {
   verified: boolean;
   role: "user" | "mod" | "admin";
   bio: string | null;
+  college_id: number | null;
+  platform_admin: boolean;
 };
 
 export type Viewer = { userId: string; email: string | null; profile: Profile | null } | null;
@@ -19,7 +21,7 @@ export async function getViewer(): Promise<Viewer> {
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   if (!data.user) return null;
-  const { data: profile } = await supabase.from("profiles").select("id, handle, branch, batch, verified, role, bio")
+  const { data: profile } = await supabase.from("profiles").select("id, handle, branch, batch, verified, role, bio, college_id, platform_admin")
     .eq("id", data.user.id).maybeSingle();
   return { userId: data.user.id, email: data.user.email ?? null, profile: (profile as Profile) ?? null };
 }
@@ -28,7 +30,7 @@ export async function getViewer(): Promise<Viewer> {
 export async function requireOnboarded(next: string) {
   const v = await getViewer();
   if (!v) redirect(`/login?next=${encodeURIComponent(next)}`);
-  if (!v.profile?.branch || !v.profile?.batch) redirect(`/onboarding?next=${encodeURIComponent(next)}`);
+  if (!v.profile?.branch || !v.profile?.batch || !v.profile?.college_id) redirect(`/onboarding?next=${encodeURIComponent(next)}`);
   return v as NonNullable<Viewer> & { profile: Profile };
 }
 
