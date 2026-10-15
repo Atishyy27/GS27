@@ -5,7 +5,8 @@ const LINKS = [
   { href: "/library", label: "Library" },
   { href: "/feed", label: "Feed" },
   { href: "/g", label: "Groups" },
-  { href: "/g/placecom", label: "Placecom" },
+  { href: "/placecom", label: "Placecom" },
+  { href: "/hall", label: "Hall of Fame" },
 ];
 
 export default async function Nav() {
