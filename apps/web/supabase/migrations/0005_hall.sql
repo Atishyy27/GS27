@@ -95,12 +95,13 @@ begin
 end $$;
 
 -- ---------- SEED ROWS: edit freely ----------
--- SEED 1: his own project. Add the Chrome Web Store link in url when known.
-insert into public.projects (slug, name, tagline, description, tags, builders, batch, branch, status, submitted_by)
+-- SEED 1: his own project (store link from his portfolio, src/content/site.ts).
+insert into public.projects (slug, name, tagline, description, tags, builders, batch, branch, status, submitted_by, url)
 values ('prd-helper', 'PRD Helper',
         'Chrome extension that takes the pain out of placement registration',
         'Built for the SGSITS placement registration (PRD) process: names files the way the cell wants them, auto-fills the registration form, and converts documents to the required format. Tested with the TPO in January 2026.',
-        array['chrome-extension', 'placements', 'automation'], 'Atishay Jain, 2027', 2027, 'Mech', 'approved', null);
+        array['chrome-extension', 'placements', 'automation'], 'Atishay Jain, 2027', 2027, 'Mech', 'approved', null,
+        'https://chromewebstore.google.com/detail/prd-verification-tool/lhebknliliiigghklkdkljobkkmbhaoj');
 -- SEED 2: a batchmate's tool. Builders and details left blank until they confirm.
 insert into public.projects (slug, name, tagline, tags, builders, status, submitted_by)
 values ('leadgs', 'leadgs', 'Details coming soon', array['tool'], '', 'approved', null);
