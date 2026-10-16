@@ -1,0 +1,494 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Placecom &times; 2028 &times; 2029 - the unofficial session</title>
+<script>if (window.matchMedia("(max-width: 760px)").matches) document.documentElement.classList.add("m");</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"><style>
+:root{--bg:#0e0f13;--fg:#f2f2f2;--dim:#9a9ca6;--dim2:#4a4d57;--acc:#ff5a36;--g:#3dd68c;--card:#16181e}
+html,body,.reveal,.reveal-viewport{background:var(--bg)}
+.reveal{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--fg);font-size:26px}
+.reveal .slides section{width:1280px;height:720px;padding:22px 58px 40px;box-sizing:border-box;text-align:left}
+.crumbs{display:flex;gap:6px;margin:0 0 22px;flex-wrap:nowrap}
+.crumb{font-size:12.5px;color:var(--dim);border:1px solid #2a2d36;border-radius:999px;padding:4px 10px;cursor:pointer;white-space:nowrap;text-decoration:none}
+.crumb.on{color:var(--bg);background:var(--acc);border-color:var(--acc);font-weight:700}
+.crumb:hover{border-color:var(--acc)}
+.reveal .tag{color:var(--acc);font-weight:700;letter-spacing:.12em;font-size:17px;margin-bottom:12px}
+.reveal h1{font-size:58px;line-height:1.12;margin:0 0 10px;text-transform:none;color:var(--fg)}
+.reveal h2{font-size:40px;line-height:1.15;margin:0 0 24px;text-transform:none;color:var(--fg);font-weight:700}
+.reveal h3{font-size:22px;color:var(--dim);margin:0 0 14px;text-transform:none;font-weight:600;letter-spacing:.02em}
+.reveal .acc{color:var(--acc)} .reveal .g{color:var(--g)} .reveal .dim{color:var(--dim)} .reveal .small{font-size:17px}
+.reveal section.title{display:flex!important;flex-direction:column;justify-content:center}
+.reveal section.title .crumbs{position:absolute;top:22px;left:58px}
+.agenda{columns:2;column-gap:60px;margin:0;padding-left:34px;font-size:30px;line-height:1.7}
+.agenda a{color:var(--fg);cursor:pointer;text-decoration:none;border-bottom:1px dashed #3a3d47} .agenda a:hover{color:var(--acc)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.reveal ul{margin:0;padding:0;list-style:none} .reveal li{margin:0 0 14px;padding-left:34px;position:relative;line-height:1.3}
+.reveal ul li:before{content:"\25B8";color:var(--acc);position:absolute;left:0} .reveal li.sub{color:var(--dim);font-size:21px;margin-left:34px}
+.reveal li.sub:before{content:"\2013";color:var(--dim)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:6px}
+.stat{background:var(--card);border-radius:16px;padding:22px 26px;border:1px solid #22252d}
+.stat .big{font-size:54px;font-weight:800;color:var(--acc);line-height:1.05} .stat .small{color:var(--dim);font-size:19px;margin-top:8px;line-height:1.35}
+.bars .bar{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-size:20px}
+.bars .bl{color:var(--fg)} .bars .bb{height:22px;border-radius:5px} .bars .bv{font-weight:700;min-width:46px} .bars .bn{color:var(--dim);font-size:16px}
+.funnels{display:flex;gap:34px;align-items:flex-end;height:270px;margin:4px 0 14px}
+.funnel{display:flex;gap:8px;align-items:flex-end}
+.funnel span{width:46px;background:var(--acc);border-radius:6px 6px 0 0;color:var(--bg);font-weight:800;font-size:17px;display:flex;justify-content:center;padding-top:6px;box-sizing:border-box}
+.funnel span+span{background:#ff8a6e} .funnel span+span+span{background:#ffb39f} .funnel span+span+span+span{background:#ffd8cf}
+.big-line{font-size:34px;font-weight:700;margin-top:30px}
+table.t{border-collapse:collapse;width:100%;font-size:24px} table.t th{background:var(--acc);color:var(--bg);text-align:left;padding:12px 16px}
+table.t td{padding:12px 16px;border-bottom:1px solid #1a1c22} table.t tr:nth-child(even) td{background:#1a1c22}
+.game{display:grid;grid-template-columns:420px 1fr;gap:40px} .game .inputs{display:flex;flex-direction:column;gap:16px}
+.game label{display:flex;flex-direction:column;font-size:18px;color:var(--dim);gap:6px}
+.game input,.game select{font-size:24px;padding:10px 12px;border-radius:8px;border:1px solid #2a2d36;background:var(--card);color:var(--fg)}
+.game button{font-size:24px;padding:12px;border:0;border-radius:10px;background:var(--g);color:var(--bg);font-weight:800;cursor:pointer}
+.g-out{background:var(--card);border-radius:16px;padding:26px;font-size:24px;min-height:300px} .g-out .lvl{font-size:52px;font-weight:800;margin-bottom:10px}
+.guide{margin:0;padding-left:34px;font-size:23px;line-height:1.32} .guide li{margin:0 0 9px}
+.callout{margin-top:16px;background:var(--card);border-left:5px solid var(--g);border-radius:10px;padding:14px 18px;font-size:21px;line-height:1.35}
+.gcols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px} .gcols ul li{font-size:19px;margin-bottom:8px} .gcols .who{color:var(--dim);font-size:15px}
+.lb-in select{font-size:19px;padding:9px 11px;border-radius:8px;border:1px solid #2a2d36;background:var(--card);color:var(--fg)}
+.dm{background:var(--card);border:1px solid #22252d;border-radius:14px;padding:22px 24px;font-size:22px;line-height:1.45}
+.fill{color:var(--acc);border-bottom:2px dashed var(--acc);padding:0 3px;outline:none} .fill:focus{background:#2a1a15}
+.tw{min-height:52px} .caret{color:var(--acc);animation:blink 1s steps(1) infinite} @keyframes blink{50%{opacity:0}}
+.lb-in{display:flex;gap:10px;margin-bottom:14px} .lb-in input{font-size:19px;padding:9px 11px;border-radius:8px;border:1px solid #2a2d36;background:var(--card);color:var(--fg);flex:1;min-width:0}
+.lb-in button{font-size:19px;padding:9px 18px;border:0;border-radius:8px;background:var(--g);color:var(--bg);font-weight:800;cursor:pointer}
+.lb-in .ghostbtn{background:transparent;color:var(--dim);border:1px solid #3a3d47}
+.lbt{font-size:20px} .lbt td,.lbt th{padding:8px 14px} .lbt .rm{background:none;border:0;color:var(--dim);cursor:pointer;font-size:18px}
+.reels{display:flex;gap:12px;margin-top:8px} .reel{background:var(--g);color:var(--bg)!important;font-weight:800;padding:10px 18px;border-radius:10px;text-decoration:none;font-size:20px}
+.reel.off{background:transparent;color:var(--dim)!important;border:1px dashed #3a3d47;font-weight:600}
+.tierwrap{display:flex;flex-direction:column;gap:4px} .tierslide h2{margin-bottom:14px}
+.tier{display:grid;grid-template-columns:56px 1fr;min-height:46px}
+.tl{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;color:#111;border-radius:8px 0 0 8px}
+.t-s{background:#ff7f7f}.t-a{background:#ffbf7f}.t-b{background:#ffdf7f}.t-c{background:#bfff7f}.t-d{background:#7fbfff}.t-f{background:#bf7fbf}
+.tdrop{background:var(--card);border:1px solid #22252d;border-radius:0 8px 8px 0;display:flex;flex-wrap:wrap;gap:6px;padding:5px;align-content:flex-start;min-height:36px}
+.pool-row{display:grid;grid-template-columns:110px 1fr;margin-top:6px}
+.pool-label{color:var(--dim);font-size:15px;display:flex;align-items:center}
+.pool{border-radius:8px;border-style:dashed}
+.tile{display:flex;align-items:center;gap:7px;background:#23262f;border:1px solid #32353f;border-radius:8px;padding:4px 10px 4px 4px;font-size:15px;cursor:grab;user-select:none;touch-action:none}
+.tile .ini{width:26px;height:26px;border-radius:6px;background:var(--acc);color:var(--bg);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+.tile img{width:26px;height:26px;border-radius:6px;object-fit:cover}
+.tile.picked{outline:2px solid var(--g)} .tile.dragging{opacity:.35}
+.ghost{position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%) scale(1.05);box-shadow:0 8px 24px #0008}
+.tier-ctl{display:flex;gap:10px;align-items:center;margin-top:8px}
+.tier-ctl button{font-size:16px;padding:7px 14px;border-radius:8px;border:1px solid #3a3d47;background:var(--card);color:var(--fg);cursor:pointer}
+.tier-ctl button:hover{border-color:var(--acc)}
+.reveal .progress{color:var(--acc)}
+table.dense{font-size:19px} table.dense td,table.dense th{padding:7px 12px}
+.pbar{display:inline-block;width:90px;height:10px;background:#2a2d36;border-radius:5px;vertical-align:middle;overflow:hidden} .pbar i{display:block;height:100%;background:var(--g)}
+.dist{display:flex;gap:18px;align-items:flex-end;height:270px} .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:17px;color:var(--dim)}
+.dcol b{color:var(--fg);font-size:24px} .dbar{width:64px;background:var(--acc);border-radius:6px 6px 0 0} .dcol:not(:first-child) .dbar{background:var(--g)}
+.minis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px} .mini{background:var(--card);border:1px solid #22252d;border-radius:10px;padding:8px 10px}
+.mt{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .mb{display:flex;gap:8px;align-items:flex-end;height:96px}
+.mc{display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--dim)} .mc b{color:var(--fg);font-size:14px}
+.mbar{width:26px;background:var(--acc);border-radius:4px 4px 0 0} .k-intv .mbar{background:#ffb39f} .k-list .mbar{background:var(--g)}
+.two.tight{gap:18px} table.tiny{font-size:12.5px;width:100%} table.tiny td,table.tiny th{padding:3px 5px;white-space:nowrap} table.tiny th{font-size:11.5px}
+.dots{position:relative;height:46px;border-bottom:1px solid #3a3d47;margin:6px 0 22px} .dots i{position:absolute;bottom:4px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--acc);opacity:.8}
+.dots .axis{position:absolute;top:50px;left:0;right:0;display:flex;justify-content:space-between;font-size:13px;color:var(--dim)}
+.cal{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:16px} .mon{background:var(--card);border-radius:8px;padding:6px;text-align:center;font-size:14px;color:var(--dim)}
+.mon b{display:block;color:var(--fg);font-size:13px} .mon span{font-size:22px;font-weight:800;color:var(--fg)} .mon.hot{background:var(--acc)} .mon.hot span,.mon.hot b{color:var(--bg)}
+.mon{display:block}
+.sp-only{display:none!important} html.speaker .sp-only{display:inline-block!important}
+.priv{font-size:14px;color:var(--dim);margin:0 0 10px} .pending{opacity:.55}
+.crowd{margin-left:6px;font-size:11px;font-weight:700;color:var(--bg);background:var(--g);border-radius:6px;padding:2px 6px}
+.gcols .rm{background:none;border:0;color:var(--dim);cursor:pointer}
+.abar{display:none}
+html.m:not(.speaker) .abar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;gap:6px;flex-wrap:wrap;align-items:center;padding:8px 10px;
+  background:#0e0f13ee;border-top:1px solid #2a2d36;font-size:13px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+.abar a{color:var(--fg);text-decoration:none;border:1px solid #3a3d47;border-radius:999px;padding:5px 10px}
+.abar a.pdf{background:var(--acc);color:var(--bg);border-color:var(--acc);font-weight:700}
+html.m:not(.speaker) body{padding-bottom:96px}
+/* ---------- phones: one long scrolling page, no reveal ---------- */
+html.m,html.m body{overflow:auto!important;height:auto!important;background:var(--bg)}
+html.m .reveal{height:auto!important;font-size:16px;overflow:visible} html.m .reveal .slides{position:static!important;width:auto!important;height:auto!important;
+  transform:none!important;display:block!important;pointer-events:auto!important;inset:auto!important;margin:0!important;zoom:1!important}
+html.m .reveal .slides>section{display:block!important;position:relative!important;width:auto!important;height:auto!important;min-height:0!important;
+  transform:none!important;opacity:1!important;visibility:visible!important;padding:22px 16px 30px!important;border-bottom:1px solid #22252d;top:auto!important;left:auto!important}
+html.m .reveal aside.notes{display:none!important}
+html.m .reveal .slides>section,html.m .reveal .slides>section *{pointer-events:auto!important}
+html.m .two>div,html.m .game>div{min-width:0} html.m .bars .bl{width:64px!important;flex:none} html.m .bars .bb{max-width:42vw} html.m .bars .bn{display:none} html.m .bars .bv{min-width:34px}
+html.m .crumbs{overflow-x:auto;flex-wrap:nowrap;margin-bottom:12px;padding-bottom:4px} html.m .reveal section.title .crumbs{position:static}
+html.m .reveal h1{font-size:30px} html.m .reveal h2{font-size:23px;margin-bottom:14px} html.m .reveal h3{font-size:16px} html.m .reveal .tag{font-size:12px}
+html.m .reveal li{font-size:16px;padding-left:22px;margin-bottom:9px} html.m .big-line{font-size:20px;margin-top:16px}
+html.m .two,html.m .game,html.m .gcols{grid-template-columns:1fr!important;gap:18px} html.m .stats{grid-template-columns:1fr 1fr;gap:10px}
+html.m .stat{padding:12px} html.m .stat .big{font-size:28px} html.m .stat .small{font-size:13px}
+html.m .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch} html.m table.t{font-size:13px} html.m table.t td,html.m table.t th{padding:6px 8px;white-space:nowrap}
+html.m .bars{overflow-x:auto} html.m .bars .bar{font-size:14px} html.m .funnels{overflow-x:auto;height:auto;gap:16px}
+html.m .minis{grid-template-columns:1fr 1fr} html.m .dist{height:200px;gap:10px} html.m .dbar{width:40px} html.m .dcol{font-size:12px}
+html.m .agenda{columns:1;font-size:18px} html.m .guide{font-size:16px;padding-left:24px} html.m .callout{font-size:15px}
+html.m .lb-in{flex-wrap:wrap} html.m .lb-in input,html.m .lb-in select{flex:1 1 140px;font-size:16px} html.m .lbt{font-size:14px}
+html.m .tier{grid-template-columns:40px 1fr;min-height:44px} html.m .tl{font-size:18px} html.m .tile{font-size:13px;padding:6px 9px 6px 5px}
+html.m .tier-ctl{flex-wrap:wrap} html.m .pool-row{grid-template-columns:1fr} html.m .dm{font-size:16px} html.m .g-out{font-size:16px;min-height:0}
+html.m .game input,html.m .game select{font-size:16px} html.m .reels{flex-wrap:wrap}
+html.m .cal{grid-template-columns:repeat(4,1fr)}
+html.m table.t{display:block;overflow-x:auto;max-width:100%} html.m .tscroll table.t{display:table}
+</style></head>
+<body><nav class="abar"><a class="pdf" href="slides.pdf" download>Download slides (PDF)</a>
+<a href="#" data-jump="LIVE LEADERBOARD">Leaderboard</a><a href="#" data-jump="YOUR GOALS">Goals</a><a href="#" data-jump="BEST PLACES">Tier vote</a><a href="#" data-jump="THE GAME">Game</a></nav>
+<div class="reveal"><div class="slides">
+<section class="title"><div class="tag">PLACECOM &times; 2028 &times; 2029</div><h1>Hello everyone, this is Atishay.</h1><h1 class="acc">This is the unofficial session.</h1><p class="dim">Every number in here is from our own cell's sheets.</p><aside class="notes">Open loud. Unofficial, so I say what the official sessions will not.</aside></section>
+<section class="title"><div class="tag">TODAY</div><h2>What we'll talk about</h2><ol class="agenda"><li><a class="crumb-link" data-sec="0">Why we&#x27;re here</a></li><li><a class="crumb-link" data-sec="1">This season</a></li><li><a class="crumb-link" data-sec="2">Where to apply</a></li><li><a class="crumb-link" data-sec="3">Engineering vs MBA</a></li><li><a class="crumb-link" data-sec="4">Your road</a></li><li><a class="crumb-link" data-sec="5">Your numbers</a></li><li><a class="crumb-link" data-sec="6">Live</a></li><li><a class="crumb-link" data-sec="7">After today</a></li><li><a class="crumb-link" data-sec="8">The cell and you</a></li></ol><aside class="notes">Nine stops. The strip on top of every slide shows where we are; click it to jump.</aside></section>
+<section class="" data-sec="0"><div class="crumbs"><a class="crumb on" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">WHY WE&#x27;RE HERE</div><h2 class="">Why everyone is in this room today.</h2><ul><li class="">Mid-session reviews are done, for every one of you.</li><li class="">New juniors are recruited.</li><li class="">Every current cell member from 2029 and 2028 is here. That is on purpose.</li><li class="">2030 is not here, and the mid-review result is held back. Also on purpose.</li></ul><p class="big-line">I wanted to talk to every one of you, one last time.</p><aside class="notes">Speaker-led. Keep it short. No names.</aside></section>
+<section class="" data-sec="0"><div class="crumbs"><a class="crumb on" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">WHY THIS MEET, WHY BEFORE THE MID-EVAL</div><h2 class="">The cell will place you. At what package? Ask that.</h2><ul><li class="">Many of you think the cell alone gets you placed. It does. Look at the number it places you at.</li><li class="">I'll fight for you. Will you put in the work?</li><li class="">It's your career. My gain is at most a DM or a party.</li><li class="">No personal grudges with anyone. Ask anything, any time today.</li></ul><div class="reels" style="margin-top:22px"><span class="reel off">Anonymous questions: add ASK_URL</span></div><aside class="notes">From Atishay&#x27;s plan for this session (Neo 74a68509, 16 Oct 11:14). Interactive the whole way: questions at any point.</aside></section>
+<section class="" data-sec="1"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb on" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">THIS SEASON, SO FAR (TILL 15 OCT)</div><h2 class="">The college alone will not get you there.</h2><div class="stats"><div class="stat "><div class="big">40</div><div class="small">drives: 16 internship, 9 internship + job, 15 job</div></div><div class="stat "><div class="big">27 of 40</div><div class="small">happened in August and September</div></div><div class="stat "><div class="big">7.7 LPA</div><div class="small">median CTC (28 drives state one), 3.6 to 21</div></div><div class="stat "><div class="big">&#8377;25k</div><div class="small">median stipend a month (18 drives)</div></div></div><p class="dim">2027 batch: 1,179 registered, 454 cleared at least one round.</p><aside class="notes">Source: TPO&#x27;s Company Information 2026-27 sheet, 40 drives by 15 Oct. Cleared a round = on a Results or interview sheet; these are stage results, not offers.</aside></section>
+<section class="" data-sec="1"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb on" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">THE 2027 BATCH, ON CAMPUS</div><h2 class="">On campus, it's cooked: 725 of 1,179 (61%) have not cleared a single round.</h2><div class="two"><div><h3>2027 batch: how many drive lists each student is on</h3><div class="dist"><div class="dcol"><div class="dbar" style="height:200px"></div><b>725</b><span>on no list</span></div><div class="dcol"><div class="dbar" style="height:47px"></div><b>172</b><span>on 1 list</span></div><div class="dcol"><div class="dbar" style="height:34px"></div><b>125</b><span>on 2 lists</span></div><div class="dcol"><div class="dbar" style="height:22px"></div><b>83</b><span>on 3 lists</span></div><div class="dcol"><div class="dbar" style="height:20px"></div><b>74</b><span>on 4+ lists</span></div></div></div><div><ul><li class="">1,179 registered for placements</li><li class="">454 are on at least one list; 282 are on two or more</li><li class="">13 drives this season have a Results or interview sheet</li><li class="">A list is a stage result, not an offer. The real offer count is lower.</li><li class="">This is the batch above you, three months into its season.</li></ul></div></div><aside class="notes">Source: outcomes.json (analyze_outcomes.py). Lists = 2026-27 Results and interview-tracking sheets of the cell. Counts only, no names. Do not call these offers.</aside></section>
+<section class="" data-sec="1"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb on" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">EVERY DRIVE, TEST TO LIST</div><h2 class="">Every 2026-27 drive with a sheet: who sat, who got interviewed, who made the list.</h2><div class="minis"><div class="mini"><div class="mt">Drive 20-07-2026-02</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>274</b><span>test</span></div></div></div><div class="mini"><div class="mt">Beghou Labs</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>207</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:12px"></div><b>44</b><span>list</span></div></div></div><div class="mini"><div class="mt">Renishaw Metrology</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>61</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:14px"></div><b>15</b><span>list</span></div></div></div><div class="mini"><div class="mt">Quantiphi</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>271</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:20px"></div><b>96</b><span>list</span></div></div></div><div class="mini"><div class="mt">Trinamix</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>201</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:42px"></div><b>148</b><span>list</span></div></div></div><div class="mini"><div class="mt">Addverb</div><div class="mb"><div class="mc k-intv"><div class="mbar" style="height:58px"></div><b>102</b><span>intv</span></div></div></div><div class="mini"><div class="mt">Deloitte (Dream)</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>473</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:16px"></div><b>136</b><span>list</span></div></div></div><div class="mini"><div class="mt">ITGeeks</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>208</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:26px"></div><b>94</b><span>list</span></div></div></div><div class="mini"><div class="mt">DCM Shriram</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>53</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:36px"></div><b>33</b><span>list</span></div></div></div><div class="mini"><div class="mt">Larsen &amp; Toubro</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>117</b><span>test</span></div></div></div><div class="mini"><div class="mt">LTM (Day-1 mass)</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>376</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:12px"></div><b>84</b><span>list</span></div></div></div><div class="mini"><div class="mt">Axxela Research</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>349</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:57px"></div><b>346</b><span>list</span></div></div></div><div class="mini"><div class="mt">Futures First</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:40px"></div><b>69</b><span>test</span></div><div class="mc k-list"><div class="mbar" style="height:58px"></div><b>100</b><span>list</span></div></div></div><div class="mini"><div class="mt">Forbes Marshall</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>61</b><span>test</span></div><div class="mc k-intv"><div class="mbar" style="height:40px"></div><b>43</b><span>intv</span></div><div class="mc k-list"><div class="mbar" style="height:40px"></div><b>43</b><span>list</span></div></div></div><div class="mini"><div class="mt">iCuerious Research</div><div class="mb"><div class="mc k-test"><div class="mbar" style="height:58px"></div><b>140</b><span>test</span></div><div class="mc k-intv"><div class="mbar" style="height:12px"></div><b>29</b><span>intv</span></div><div class="mc k-list"><div class="mbar" style="height:12px"></div><b>29</b><span>list</span></div></div></div></div><p class="dim small">test = filled seats on the lab allocation sheet; intv = interview-tracking sheet; list = Results sheet (a stage list, not offers). Some lists cover more than one stage, so a list can be longer than the test count. Interview-tracking sheets the cell can see: 2025 batch 6 drives, 165 students; 2026 batch 8 drives, 296 students; 2027 batch 4 drives, 160 students.</p><aside class="notes">Source: results_2026_27.json (analyze_results.py) and history.json (analyze_history.py). Counts only.</aside></section>
+<section class="" data-sec="1"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb on" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">EVERY COMPANY THIS SEASON</div><h2 class="">All 40 drives of 2026-27, by CTC.</h2><div class="two tight"><div class="tscroll"><table class="t tiny"><tr><th>Company</th><th>Type</th><th>CTC LPA</th><th>Stipend /mo</th><th>10/12 cut</th><th>Branches</th></tr><tr><td>Infosys (Super Dream)</td><td>Job</td><td>21.0</td><td>-</td><td>65%</td><td>CSE, ECE, EE, EI, IT</td></tr><tr><td>Futures First</td><td>Intern</td><td>18.9</td><td>40k</td><td>50%</td><td>All</td></tr><tr><td>Addverb</td><td>Intern+FTE</td><td>16.6</td><td>25k</td><td>60%</td><td>CSE, ECE, EE, EI, IT</td></tr><tr><td>Asian Paints</td><td>Job</td><td>11.6</td><td>-</td><td>60%</td><td>EE, EI, Mech</td></tr><tr><td>Beghou Labs</td><td>Intern+FTE</td><td>11.4</td><td>30k</td><td>75%</td><td>All</td></tr><tr><td>BUSY Infotech</td><td>Intern</td><td>10.0</td><td>25k</td><td>65%</td><td>CSE, IT</td></tr><tr><td>CloudLex Inc</td><td>Intern</td><td>10.0</td><td>15k</td><td>80%</td><td>CSE, ECE, IT</td></tr><tr><td>Forbes Marshall</td><td>Job</td><td>10.0</td><td>-</td><td>65%</td><td>EI, Mech</td></tr><tr><td>Infosys (HackWithInfy)</td><td>Job</td><td>9.5</td><td>-</td><td>60%</td><td>All</td></tr><tr><td>CarTrade Tech (CarWale)</td><td>Intern+FTE</td><td>9.0</td><td>-</td><td>70%</td><td>CSE, IT</td></tr><tr><td>Larsen &amp; Toubro</td><td>Job</td><td>8.6</td><td>-</td><td>65%</td><td>Civil, CSE, ECE, EE,</td></tr><tr><td>Quantiphi</td><td>Intern</td><td>8.5</td><td>24k</td><td>70%</td><td>All</td></tr><tr><td>Trinamix</td><td>Job</td><td>8.0</td><td>-</td><td>60%</td><td>All</td></tr><tr><td>Pragati Infra</td><td>Job</td><td>7.7</td><td>-</td><td>60%</td><td>Civil, Mech</td></tr><tr><td>Deloitte (Dream)</td><td>Job</td><td>7.6</td><td>-</td><td>60%</td><td>Civil, CSE, ECE, EE,</td></tr><tr><td>Reliance (Off-Campus)</td><td>Job</td><td>7.5</td><td>-</td><td>60%</td><td>Civil, EE, EI, Mech</td></tr><tr><td>Faurecia Interior</td><td>Intern</td><td>6.5</td><td>-</td><td>60%</td><td>ECE, EE, EI, IP, Mec</td></tr><tr><td>DCM Shriram</td><td>Job</td><td>6.5</td><td>-</td><td>70%</td><td>Civil, EE, EI, Mech</td></tr><tr><td>Renishaw Metrology</td><td>Intern+FTE</td><td>6.0</td><td>-</td><td>70%</td><td>CSE, ECE, EI, IP, IT</td></tr><tr><td>ITGeeks</td><td>Intern+FTE</td><td>6.0</td><td>50k</td><td>70%</td><td>All</td></tr></table></div><div class="tscroll"><table class="t tiny"><tr><th>Company</th><th>Type</th><th>CTC LPA</th><th>Stipend /mo</th><th>10/12 cut</th><th>Branches</th></tr><tr><td>iCuerious Research</td><td>Intern+FTE</td><td>6.0</td><td>46k</td><td>70%</td><td>CSE, ECE, EE, EI, IT</td></tr><tr><td>Cloud SynApps</td><td>Intern</td><td>5.5</td><td>10k</td><td>65%</td><td>CSE, IT</td></tr><tr><td>JSW Group</td><td>Job</td><td>5.5</td><td>-</td><td>60%</td><td>Civil, EE, EI, IP, M</td></tr><tr><td>ITGeeks</td><td>Intern+FTE</td><td>5.0</td><td>40k</td><td>65%</td><td>All</td></tr><tr><td>Gemba Concepts</td><td>Intern</td><td>4.5</td><td>20k</td><td>65%</td><td>IP, Mech</td></tr><tr><td>LTM (Day-1 mass)</td><td>Job</td><td>4.0</td><td>-</td><td>65%</td><td>All</td></tr><tr><td>Perfect Generator</td><td>Intern</td><td>4.0</td><td>15k</td><td>60%</td><td>EE, Mech</td></tr><tr><td>Infosys (Day-1 mass)</td><td>Job</td><td>3.6</td><td>-</td><td>65%</td><td>All</td></tr><tr><td>EPAM</td><td>Intern+FTE</td><td>-</td><td>-</td><td>70%</td><td>CSE, ECE, EI, IT</td></tr><tr><td>Adobe</td><td>Intern</td><td>-</td><td>110k</td><td>65%</td><td>All</td></tr><tr><td>Indian Institute</td><td>Intern</td><td>-</td><td>-</td><td>60%</td><td>All</td></tr><tr><td>Qualcomm</td><td>Job</td><td>-</td><td>-</td><td>65%</td><td>CSE, ECE, EI, IT</td></tr><tr><td>Sarthak Singapore</td><td>Intern</td><td>-</td><td>7k</td><td>60%</td><td>Civil</td></tr><tr><td>Rubrik (Off-Campus)</td><td>Intern</td><td>-</td><td>-</td><td>80%</td><td>CSE, ECE, EE, EI, IT</td></tr><tr><td>Worldpay</td><td>Intern</td><td>-</td><td>25k</td><td>70%</td><td>CSE, ECE, EI, IT</td></tr><tr><td>Ather Energy</td><td>Job</td><td>-</td><td>-</td><td>60%</td><td>ECE, EE, EI, IP, Mec</td></tr><tr><td>Axxela Research</td><td>Intern</td><td>-</td><td>20k</td><td>50%</td><td>All</td></tr><tr><td>Zscaler Softech</td><td>Intern</td><td>-</td><td>-</td><td>65%</td><td>CSE, ECE, EI, IT</td></tr><tr><td>POSiLabs</td><td>Intern+FTE</td><td>-</td><td>33k</td><td>65%</td><td>All</td></tr><tr><td>Newzera Tech Labs (Zangoh)</td><td>Intern</td><td>-</td><td>10k</td><td>65%</td><td>CSE, ECE, EI, IT</td></tr></table></div></div><aside class="notes">Source: companies_2026_27.json (analyze_companies.py over the TPO&#x27;s Company Information 2026-27 sheet, read 15 Oct). &#x27;-&#x27; = not stated in the sheet.</aside></section>
+<section class="" data-sec="1"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb on" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">MONEY AND THE CALENDAR</div><h2 class="">Most CTCs sit between 5 and 12 LPA. The season runs August to October.</h2><div class="two"><div><h3>CTC of each drive that states one (28), LPA</h3><div class="dots"><i style="left:16.4%" title="3.6"></i><i style="left:18.2%" title="4.0"></i><i style="left:18.4%" title="4.0"></i><i style="left:20.5%" title="4.5"></i><i style="left:22.7%" title="5.0"></i><i style="left:25.0%" title="5.5"></i><i style="left:25.0%" title="5.5"></i><i style="left:27.3%" title="6.0"></i><i style="left:27.3%" title="6.0"></i><i style="left:27.3%" title="6.0"></i><i style="left:29.5%" title="6.5"></i><i style="left:29.5%" title="6.5"></i><i style="left:34.1%" title="7.5"></i><i style="left:34.5%" title="7.6"></i><i style="left:35.1%" title="7.7"></i><i style="left:36.4%" title="8.0"></i><i style="left:38.6%" title="8.5"></i><i style="left:39.1%" title="8.6"></i><i style="left:40.9%" title="9.0"></i><i style="left:43.2%" title="9.5"></i><i style="left:45.5%" title="10.0"></i><i style="left:45.5%" title="10.0"></i><i style="left:45.5%" title="10.0"></i><i style="left:51.9%" title="11.4"></i><i style="left:52.7%" title="11.6"></i><i style="left:75.5%" title="16.6"></i><i style="left:85.8%" title="18.9"></i><i style="left:95.5%" title="21.0"></i><div class="axis"><span>0</span><span>22.0</span></div></div><h3 style="margin-top:22px">Stipend a month (18 drives), &#8377;</h3><div class="dots"><i style="left:5.8%" title="7k"></i><i style="left:8.3%" title="10k"></i><i style="left:8.3%" title="10k"></i><i style="left:12.5%" title="15k"></i><i style="left:12.5%" title="15k"></i><i style="left:16.7%" title="20k"></i><i style="left:16.7%" title="20k"></i><i style="left:20.0%" title="24k"></i><i style="left:20.8%" title="25k"></i><i style="left:20.8%" title="25k"></i><i style="left:20.8%" title="25k"></i><i style="left:25.0%" title="30k"></i><i style="left:27.8%" title="33k"></i><i style="left:33.2%" title="40k"></i><i style="left:33.3%" title="40k"></i><i style="left:38.2%" title="46k"></i><i style="left:41.7%" title="50k"></i><i style="left:91.7%" title="110k"></i><div class="axis"><span>0</span><span>120k</span></div></div></div><div><h3>Drives by month, 2026</h3><div class="cal"><div class="mon"><b>Jan</b><span></span></div><div class="mon"><b>Feb</b><span>1</span></div><div class="mon"><b>Mar</b><span></span></div><div class="mon"><b>Apr</b><span></span></div><div class="mon"><b>May</b><span></span></div><div class="mon"><b>Jun</b><span></span></div><div class="mon"><b>Jul</b><span>3</span></div><div class="mon hot"><b>Aug</b><span>14</span></div><div class="mon hot"><b>Sep</b><span>13</span></div><div class="mon hot"><b>Oct</b><span>9</span></div><div class="mon"><b>Nov</b><span></span></div><div class="mon"><b>Dec</b><span></span></div></div><ul><li class="">CTC buckets: under 5: 4, 5 to 8: 11, 8 to 12: 10, 12 and up: 3</li><li class="">Median CTC 7.7 LPA; median stipend &#8377;25k</li><li class="">Oct counts only run to 15 Oct</li></ul></div></div><aside class="notes">Source: companies_2026_27.json and insights.json (drives_by_month, ctc, stipend).</aside></section>
+<section class="" data-sec="1"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb on" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">BRANCH IS NOT THE EXCUSE</div><h2 class="">Mech gets 28 of 40 drives. CSE gets 29. The gap is preparation.</h2><div class="tscroll"><table class="t dense"><tr><th>Branch</th><th>Drives open (of 40)</th><th>Registered</th><th>On 1+ list</th><th>Rate</th><th>On 2+ lists</th><th>On none</th></tr><tr><td><b>IT</b></td><td>29</td><td>156</td><td>87</td><td><span class="pbar"><i style="width:56%"></i></span> 56%</td><td>56</td><td class="acc">69 (44%)</td></tr><tr><td><b>CSE</b></td><td>29</td><td>165</td><td>86</td><td><span class="pbar"><i style="width:52%"></i></span> 52%</td><td>56</td><td class="acc">79 (48%)</td></tr><tr><td><b>EI</b></td><td>32</td><td>117</td><td>58</td><td><span class="pbar"><i style="width:50%"></i></span> 50%</td><td>41</td><td class="acc">59 (50%)</td></tr><tr><td><b>ECE</b></td><td>28</td><td>116</td><td>55</td><td><span class="pbar"><i style="width:47%"></i></span> 47%</td><td>35</td><td class="acc">61 (53%)</td></tr><tr><td><b>EE</b></td><td>26</td><td>119</td><td>51</td><td><span class="pbar"><i style="width:43%"></i></span> 43%</td><td>27</td><td class="acc">68 (57%)</td></tr><tr><td><b>Mech</b></td><td>28</td><td>116</td><td>45</td><td><span class="pbar"><i style="width:39%"></i></span> 39%</td><td>32</td><td class="acc">71 (61%)</td></tr><tr><td><b>IP</b></td><td>19</td><td>115</td><td>35</td><td><span class="pbar"><i style="width:30%"></i></span> 30%</td><td>22</td><td class="acc">80 (70%)</td></tr><tr><td><b>Civil</b></td><td>20</td><td>118</td><td>28</td><td><span class="pbar"><i style="width:24%"></i></span> 24%</td><td>10</td><td class="acc">90 (76%)</td></tr><tr><td><b>BME</b></td><td>13</td><td>87</td><td>9</td><td><span class="pbar"><i style="width:10%"></i></span> 10%</td><td>3</td><td class="acc">78 (90%)</td></tr></table></div><p class="dim small">A "list" = a 2026-27 Results or interview-tracking sheet. Being on one means you cleared at least that stage. Not an offer.</p><aside class="notes">Source: outcomes.json (analyze_outcomes.py over the cell&#x27;s PRD Status 2027 tab and 13 drives&#x27; Results / interview sheets, read 15 Oct). Drives open: insights.json.</aside></section>
+<section class="" data-sec="1"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb on" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">INTERVIEWS AND THE GATE</div><h2 class="">Less than half get past the first interview.</h2><div class="two"><div><div class="funnels"><div class="funnel"><span style="height:230px">105</span><span style="height:76px">35</span><span style="height:30px">14</span><span style="height:18px">3</span></div><div class="funnel"><span style="height:230px">21</span><span style="height:43px">4</span><span style="height:18px">1</span></div><div class="funnel"><span style="height:230px">59</span><span style="height:113px">29</span><span style="height:19px">5</span></div></div><p class="dim small">Across 12 drives with interview sheets: 519 did round 1, 202 did round 2 (39%). The three steepest drives.</p></div><div><h3>Before the test: your 10th and 12th marks</h3><ul><li class="">13 drives ask for 60%</li><li class="">14 ask for 65%</li><li class="">11 ask for 70% or more</li><li class="">4 of 40 come with a service bond</li></ul></div></div><aside class="notes">Interview sheets span Feb 2025 to Sep 2026. Cut-offs as written in the company sheet.</aside></section>
+<section class="" data-sec="1"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb on" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">THE COMPANIES ARE OUTSIDE</div><h2 class="">Our cell called about 1,904 companies this summer. 14 of them came here.</h2><div class="stats"><div class="stat "><div class="big">1,904</div><div class="small">companies in our calling list, from the recruiter lists of 31 other colleges</div></div><div class="stat "><div class="big">105</div><div class="small">companies on the cell's priority list pay 10 LPA or more</div></div></div><p class="big-line">Off-campus is not plan B. It is where most of the companies are.</p><aside class="notes">Approximate match on company names.</aside></section>
+<section class="tierslide" data-sec="2"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb on" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">BEST PLACES TO APPLY</div><h2 class="">Where do you actually apply? Let's rank them.</h2><div class="tierwrap" data-prevent-swipe><div class="tiers"><div class="tier"><div class="tl t-s">S</div><div class="tdrop" data-tier="S"></div></div><div class="tier"><div class="tl t-a">A</div><div class="tdrop" data-tier="A"></div></div><div class="tier"><div class="tl t-b">B</div><div class="tdrop" data-tier="B"></div></div><div class="tier"><div class="tl t-c">C</div><div class="tdrop" data-tier="C"></div></div><div class="tier"><div class="tl t-d">D</div><div class="tdrop" data-tier="D"></div></div><div class="tier"><div class="tl t-f">F</div><div class="tdrop" data-tier="F"></div></div></div><div class="pool-row"><div class="pool-label">Unranked</div><div class="tdrop pool" data-tier="pool"></div></div><div class="tier-ctl"><button id="tl-sugg">Suggested tiers</button><button id="tl-add">+ Add</button><button id="tl-reset">Reset</button><button id="tl-clearvotes" class="sp-only">Clear crowd votes</button><span class="dim small" id="tl-msg">Drag a tile, or tap a tile then tap a row. Your placement counts as your vote.</span></div></div><aside class="notes">Rank live with the room. Suggested tiers are drafts: Referrals: S (A warm intro skips the HR filter entirely.) | Cold mail: S (Straight to a person who can say yes. My count: about 120.) | Wellfound: S (Startups, and founders actually reply.) | YC Work at a Startup: A (Good startups, you apply to the founders directly.) | Instahyre: A (Curated; recruiters reach out to you.) | Jack &amp; Jill: A (AI recruiter that matches you to roles; new, judge it yourself.) | Cutshort: A (Tech-only, decent startup roles.) | Company career pages: B (Works for big names if your resume clears the filter.) | Hirist: B (Tech roles, mostly experienced, some fresher.) | Unstop: B (Competitions that turn into interviews.) | X / Twitter DMs: B (Founders hire in public; a good reply gets you a call.) | Internshala: C (Many internships, low pay, huge applicant pools.) | Naukri: C (Mass hiring, mostly service companies.) | Indeed: D (Volume, little signal.) | Foundit: D (Same as Indeed, fewer tech roles.) | LinkedIn Easy Apply: D (Hundreds of applicants per post. LinkedIn is for people, not the button.)</aside></section>
+<section class="" data-sec="3"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb on" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">ENGINEERING VS MANAGEMENT</div><h2 class="">Engineering is getting harder. MBA is not an escape hatch.</h2><div class="two"><div><h3 class="acc">Engineering: our own sheets</h3><div class="bars"><div class="bar"><span class="bl" style="width:120px">under 5</span><span class="bb" style="width:120px;background:var(--acc)"></span><span class="bv">4</span><span class="bn">drives</span></div><div class="bar"><span class="bl" style="width:120px">5 to 8</span><span class="bb" style="width:330px;background:var(--acc)"></span><span class="bv">11</span><span class="bn">drives</span></div><div class="bar"><span class="bl" style="width:120px">8 to 12</span><span class="bb" style="width:300px;background:var(--acc)"></span><span class="bv">10</span><span class="bn">drives</span></div><div class="bar"><span class="bl" style="width:120px">12 and up</span><span class="bb" style="width:90px;background:var(--acc)"></span><span class="bv">3</span><span class="bn">drives</span></div></div><ul><li class="">Median 7.7 LPA across 28 drives that state a CTC</li><li class="">27 of 40 drives landed in August and September</li></ul></div><div><h3 class="g">Management: my read</h3><ul><li class="">My view, Oct 2026: engineering placements are trending down overall.</li><li class="">Per what I have seen: IIM Calcutta, three months in, about 100 placements.</li><li class="">XLRI's placecom placed their entire batch. Look at how.</li><li class="">I'm going for an MBA. Taking CAT? DM me, we study together.</li></ul><div class="reels"><span class="reel off">Reel 1: add link</span><span class="reel off">Reel 2: add link</span><span class="reel off">Reel 3: add link</span></div></div></div><aside class="notes">Management numbers are Atishay&#x27;s claims, unverified, said as his view. Reels: fill REEL_URLS at the top of build_deck_v3.py.</aside></section>
+<section class="" data-sec="3"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb on" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">ENGINEERING TODAY</div><h2 class="">Quick question: what is software development?</h2><div class="two"><div><h3 class="acc">Tech is compressing</h3><ul><li class="">It's an umbrella word for fifty different jobs, not one.</li><li class="">One engineer now does many of them. Know more than one thing.</li><li class="">My work so far: an STT eval harness, AI evals, a desktop app, field visits, L1 support, patents.</li><li class="sub">I'll open my LinkedIn and show you.</li></ul></div><div><h3 class="g">Core is not dead</h3><ul><li class="">Embedded, VLSI, avionics, aerospace: design and test, end to end.</li><li class="">It's the future, if you commit to it.</li><li class="">I can get you contacts, up to the gate. Getting in is your work.</li><li class="">If I don't have the contact, I'll find it.</li></ul></div></div><aside class="notes">Ask the room first, let 2-3 people answer, then show the slide. His plan, Neo 74a68509 (16 Oct). The work list is his own, from the same recording.</aside></section>
+<section class="" data-sec="4"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb on" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">PICK YOUR ROAD</div><h2 class="">MNC or Dev? The road decides the work.</h2><div class="two"><div><h3 class="acc">MNC / product OA</h3><ul><li class="">Competitive programming is the filter</li><li class="">Contest rating &gt; random question count</li><li class="">LeetCode + Codeforces contests, every week</li></ul></div><div><h3 class="g">Dev / startup</h3><ul><li class="">Open source is the proof</li><li class="">LFX mentorship is open right now</li><li class="">Merged PRs in real orgs &gt; tutorial projects</li></ul></div></div><p class="dim">Either road: finish one sheet (Striver A2Z / NeetCode 150 / CSES) before you count questions.</p></section>
+<section class="" data-sec="4"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb on" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">WHAT I KEEP TELLING JUNIORS</div><h2 class="">The same eight things, every time someone asks.</h2><ol class="guide"><li>Ten tailored applications beat five hundred generic ones. Read the company, make the CV for it, mail the founder.</li><li>Learn concepts, not languages: microservices, pods, scaling. Everyone needs some JavaScript, APIs and SQL.</li><li>Under 200 LeetCode? Don&#x27;t quote the number. Keep solving. I still do.</li><li>Say what your project did, with a number. Nobody can see it ran for the whole college.</li><li>Startups worry you won&#x27;t show up. Say when you can join, and keep it.</li><li>Walk up to seniors without hesitation. Ask one concrete question about your road.</li><li>DSA gets you in the door. Development is the longer game: it never stops changing.</li><li>Bangalore is always open. Off-campus is not luck if you start in second year.</li></ol><aside class="notes">From Atishay&#x27;s own conversations with juniors (Neo memories, Oct 2026): Ten tailored applications beat five hundred generic ones. Read the company, make the CV for it, mail the founder. (8 and 10 Oct) | Learn concepts, not languages: microservices, pods, scaling. Everyone needs some JavaScript, APIs and SQL. (3 and 8 Oct) | Under 200 LeetCode? Don&#x27;t quote the number. Keep solving. I still do. (3 Oct) | Say what your project did, with a number. Nobody can see it ran for the whole college. (15 Oct) | Startups worry you won&#x27;t show up. Say when you can join, and keep it. (15 Oct) | Walk up to seniors without hesitation. Ask one concrete question about your road. (3 and 4 Oct) | DSA gets you in the door. Development is the longer game: it never stops changing. (4 Oct) | Bangalore line: 3 and 8 Oct.</aside></section>
+<section class="" data-sec="4"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb on" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">YOUR CV AND YOUR INTERVIEW</div><h2 class="">Before you walk into any interview.</h2><ol class="guide"><li>Three solid projects, two internships. Headline each by what it does, then explain how.</li><li>Know your terms cold. Fumbling the words reads as not having studied.</li><li>Prompt your own project into 15 points, then mock-interview yourself out loud.</li><li>Read every line of your CV: about half the questions come from it (my estimate). Carry a college-format hard copy.</li><li>MNC portals gave me zero replies, follow-ups included. HR filters on college name. Go through people.</li><li>The 2026 graduates&#x27; market lands in 2027. &quot;Lots of time&quot; is the trap.</li></ol><div class="callout"><b>Checked today:</b> a Target opening came up. I looked at our alumni working there. Every one of them has a master's. Before you apply, look at who actually works there. That is the real bar.</div><aside class="notes">Neo 74a68509 (16 Oct 11:14) and 5d1eacb9 (15 Oct): Three solid projects, two internships. Headline each by what it does, then explain how. (16 Oct) | Know your terms cold. Fumbling the words reads as not having studied. (16 Oct) | Prompt your own project into 15 points, then mock-interview yourself out loud. (16 Oct) | Read every line of your CV: about half the questions come from it (my estimate). Carry a college-format hard copy. (16 Oct) | MNC portals gave me zero replies, follow-ups included. HR filters on college name. Go through people. (15 Oct) | The 2026 graduates&#x27; market lands in 2027. &quot;Lots of time&quot; is the trap. (16 Oct) | Target: his own check on 16 Oct; no names, no count beyond &#x27;every one&#x27;.</aside></section>
+<section class="" data-sec="5"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb on" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">MY NUMBERS, CHECKED</div><h2 class="">ICPC regionalist, mechanical branch. Here's the real count.</h2><div class="two"><div><h3>LeetCode solved, end of each semester</h3><div class="bars"><div class="bar"><span class="bl" style="width:90px">Sem 2</span><span class="bb" style="width:28px;background:var(--acc)"></span><span class="bv">83</span><span class="bn"></span></div><div class="bar"><span class="bl" style="width:90px">Sem 3</span><span class="bb" style="width:86px;background:var(--acc)"></span><span class="bv">250</span><span class="bn"></span></div><div class="bar"><span class="bl" style="width:90px">Sem 4</span><span class="bb" style="width:228px;background:var(--acc)"></span><span class="bv">662</span><span class="bn"></span></div><div class="bar"><span class="bl" style="width:90px">Sem 5</span><span class="bb" style="width:273px;background:var(--acc)"></span><span class="bv">792</span><span class="bn"></span></div><div class="bar"><span class="bl" style="width:90px">Sem 6</span><span class="bb" style="width:337px;background:var(--acc)"></span><span class="bv">976</span><span class="bn"></span></div><div class="bar"><span class="bl" style="width:90px">Sem 7</span><span class="bb" style="width:347px;background:var(--acc)"></span><span class="bv">1005</span><span class="bn"></span></div></div><p class="dim small">Estimated from my LeetCode submission calendar.</p></div><div><ul><li class="">LeetCode: 1005 solved &middot; contest rating 1786 &middot; top 9%</li><li class="">Codeforces: 1314 (peak 1539) &middot; 108 problems</li><li class="">CodeChef: 314 solved &middot; AtCoder: 36</li><li class="">About 1,460 across all four</li></ul></div></div><aside class="notes">Read 15 Oct 2026 from the public profiles.</aside></section>
+<section class="" data-sec="5"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb on" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">YOUR TARGETS</div><h2 class="">Hit these by the end of each semester.</h2><table class="t"><tr><th>Semester</th><th>Problems</th><th>Also</th></tr><tr><td>Sem 1-2</td><td>Start. 0 is fine.</td><td>Pick one language, learn it properly</td></tr><tr><td>Sem 3</td><td>200</td><td>First contests, any rating</td></tr><tr><td>Sem 4</td><td>350</td><td>Weekly contest habit</td></tr><tr><td>Sem 5</td><td>600+</td><td>Internship OAs start here: be ready</td></tr><tr><td>Sem 7</td><td>900+</td><td>Placement OAs: rating matters more than count</td></tr></table><aside class="notes">Targets are drafts. The sheet goes out after the meet.</aside></section>
+<section class="" data-sec="5"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb on" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">THE GAME</div><h2 class="">Where are you, right now?</h2><div class="game"><div class="inputs"><label>Semester <select id="g-sem"><option>3</option><option>4</option><option selected>5</option><option>7</option></select></label><label>LeetCode solved <input id="g-lc" type="number" min="0" placeholder="e.g. 240"></label><label>Codeforces handle <input id="g-cf" placeholder="optional"></label><button id="g-go">Check me</button></div><div id="g-out" class="g-out">Type your numbers and hit Check.</div></div><aside class="notes">Ask 2-3 people to share their numbers live. Codeforces is read live; LeetCode is typed in.</aside></section>
+<section class="" data-sec="5"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb on" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">LIVE LEADERBOARD</div><h2 class="">Who's leading the room?</h2><div class="lb" data-prevent-swipe><div class="lb-in"><input id="lb-name" placeholder="nickname" maxlength="24" autocomplete="off"><input id="lb-lc" type="number" min="0" placeholder="LeetCode solved"><input id="lb-cf" placeholder="Codeforces handle (optional)" maxlength="24"><button id="lb-add">Add</button><button id="lb-reset" class="ghostbtn sp-only">Clear all</button></div><p class="priv">Shown on the speaker&#39;s screen to everyone in the meet. Use a nickname; Instagram handle optional.</p><table class="t lbt"><thead><tr><th>#</th><th>Nickname</th><th>LeetCode</th><th>CF rating</th><th>Score</th><th></th></tr></thead><tbody id="lb-body"></tbody></table><p class="dim small" id="lb-msg">Shout your numbers in the chat. Nicknames only.</p></div><aside class="notes">Score = LeetCode solved + Codeforces rating / 2 (a 1400 CF adds 700). CF rating is read live from codeforces.com. Nicknames only, no real names on screen.</aside></section>
+<section class="" data-sec="5"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb on" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">YOUR GOALS</div><h2 class="">Next 6 months. Next 12. Next 2 years.</h2><div class="gb" data-prevent-swipe><div class="lb-in"><select id="gb-h"><option value="6">6 months</option><option value="12">12 months</option><option value="24">2 years</option></select><input id="gb-t" placeholder="the goal, in a line" maxlength="120"><input id="gb-n" placeholder="nickname (optional)" maxlength="24"><button id="gb-add">Add</button><button id="gb-reset" class="ghostbtn sp-only">Clear all</button></div><p class="priv">Shown on the speaker&#39;s screen to everyone in the meet. Use a nickname; Instagram handle optional.</p><p class="dim small" id="gb-msg"></p><div class="gcols"><div><h3 class="acc">6 months</h3><ul id="gb-6"></ul></div><div><h3 class="g">12 months</h3><ul id="gb-12"></ul></div><div><h3>2 years</h3><ul id="gb-24"></ul></div></div></div><aside class="notes">Ask the room to drop goals in the chat, anonymous or named; type them in. From his plan (Neo 74a68509, 16 Oct).</aside></section>
+<section class="" data-sec="6"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb on" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">LIVE: OPEN SOURCE</div><h2 class="">Watch me find and solve an issue. Right now.</h2><ul><li class="">Find the org: LFX / CNCF / GSoC lists, filter by your stack</li><li class="">Find the issue: 'good first issue', recent activity, maintainer replies fast</li><li class="">Comment first, then build, then a small clean PR</li><li class="sub">Live demo: one real issue, start to PR</li><li class="">One merged PR in a real org beats five clone projects on a resume</li></ul></section>
+<section class="" data-sec="6"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb on" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">LIVE: COLD MAIL</div><h2 class="">My real count: about 125 first mails over five months. Plus follow-ups.</h2><ul><li class="">Casual, not formal. Subject: builder, looking for &lt;role&gt;.</li><li class="">Line 1: proof of work, with a link and a number</li><li class="">Line 2: why this company, specifically</li><li class="">Line 3: I can join now, zero notice period. CV attached.</li><li class="">Send it to the address on the job post. One person, not ten.</li><li class="">Follow up. The content decides replies, not the count.</li><li class="sub">Live demo: I'll write one in front of you</li></ul><aside class="notes">His method as he described it to a batchmate on 15 Oct (Neo b8bf5ad9): about 125 mails, casual tone, follow-ups.</aside></section>
+<section class="" data-sec="6"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb on" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">LIVE: LINKEDIN DM</div><h2 class="">Let's write one together.</h2><div class="two"><div class="dm">Hi <span class="fill" contenteditable="true" spellcheck="false">name</span>,<br><br>I'm <span class="fill" contenteditable="true" spellcheck="false">you</span>, <span class="fill" contenteditable="true" spellcheck="false">branch</span> <span class="fill" contenteditable="true" spellcheck="false">batch</span> at SGSITS, your junior. I saw you work on <span class="fill" contenteditable="true" spellcheck="false">team / product</span> at <span class="fill" contenteditable="true" spellcheck="false">company</span>.<br><br>I've built <span class="fill" contenteditable="true" spellcheck="false">one proof, with a number</span>.<br><br>Could we talk on a call this week? When are you free?</div><div><ul><li class="">Message seniors from our college, or people doing the exact work you want.</li><li class="">First message asks for a call, not a referral.</li><li class="">When they reply, call. Talking beats typing: a message is secondary for them.</li><li class="">Same college is not a free pass. It's hit or miss, so send more than one.</li><li class="">No reply? Follow up once, politely.</li></ul></div></div><aside class="notes">Click a field and type live. Rules from Neo 74a68509 (16 Oct): call seniors instead of messaging; text &#x27;when are you free to talk?&#x27; then call; LinkedIn outreach to alumni is 50-50; one call to a senior once got his CV passed up to a VP (hiring had closed). No follow-up timing was given, so none is stated.</aside></section>
+<section class="" data-sec="7"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb on" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">A NOTE FOR SOME OF YOU</div><h2 class="tw">An important note for <span id="tw"></span><span class="caret">|</span></h2><ul><li class="">Calling brings companies. It really does.</li><li class="">Our cell called about 1,904 companies this summer. 14 of them came here.</li><li class="">Tell me now: why do calls fail? We fix those reasons, one by one.</li></ul><aside class="notes">Typewriter types CPC, deletes it, then SDC, then managers, then stops on &#x27;the 2028 batch&#x27;. Ask the juniors for reasons calls fail and note them. From Neo 74a68509 (16 Oct).</aside></section>
+<section class="" data-sec="7"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb on" data-sec="7">8. After today</a><a class="crumb" data-sec="8">9. The cell and you</a></div><div class="tag">WHAT WE&#x27;RE BUILDING</div><h2 class="">Our own Point Blank. And CodeForster comes back.</h2><ul><li class="">DSCE's Point Blank: synced IDs, one leaderboard, a culture that codes</li><li class="">Ours: Placecom + Hash Include + CodeForster, one tracker</li><li class="sub">You enter your handles once; progress tracks itself, semester by semester</li><li class="">CodeForster as a hardcore coding club: contests, upsolving, sheets, together. No events for the sake of events.</li><li class="">Open source, so you run it after I leave.</li><li class="">Monthly 1:1 profile check-ups. Ask your seniors; if they don't, ask me. You come to me.</li><li class="">Points of contact from 2028 and 2029, for engineering and for management.</li><li class="">Make a LinkedIn group. React to each other's posts. Are we connected?</li></ul><aside class="notes">From Neo 74a68509 (16 Oct): revive CodeForster after this meet; regular profile check-ups; he has about 8,000 LinkedIn followers (his figure).</aside></section>
+<section class="" data-sec="8"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb on" data-sec="8">9. The cell and you</a></div><div class="tag">CELL TEA</div><h2 class="">What the cell has taught all of us. No names, promise.</h2><ul><li class="">Reviews look at how you talk, code and carry yourself. Not just the tasks you ticked.</li><li class="">The most common complaint about any batch: too casual.</li><li class="">Groupism splits fast: sixteen become eights, then fours, then twos.</li><li class="">Small courtesies get noticed. So does skipping them.</li><li class="">People go quiet once they're placed. Seniors remember who didn't.</li><li class="">Cell interviews start friendly, then dig into whatever you wrote on the form.</li></ul><aside class="notes">Patterns from Atishay&#x27;s own conversations (Neo, 3 to 16 Oct). Keep it light. No names, no stories that point at anyone.</aside></section>
+<section class="" data-sec="8"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb on" data-sec="8">9. The cell and you</a></div><div class="tag">MAKING THE CELL WORK FOR YOU</div><h2 class="">What the TnP cell is, and how to use it.</h2><div class="two"><div><h3 class="acc">What the cell is</h3><ul><li class="">The team that brings every on-campus drive here</li><li class="">Summer calling: 1,904 companies called this year</li><li class="">Drive duty, HR calls, registration checks, reviews</li><li class="">A senior network across every company that came</li></ul></div><div><h3 class="g">How it pays you back</h3><ul><li class="">Talk to your seniors. Ask early, ask often.</li><li class="">Never let a senior down. Never play with their expectations.</li><li class="">Stay in touch, even after you are placed.</li><li class="">Some of your favourite seniors will be in other cities. One message keeps the door open.</li></ul></div></div><aside class="notes">Tell the personal story here yourself. No names on screen.</aside></section>
+<section class="title" data-sec="8"><div class="crumbs"><a class="crumb" data-sec="0">1. Why we&#x27;re here</a><a class="crumb" data-sec="1">2. This season</a><a class="crumb" data-sec="2">3. Where to apply</a><a class="crumb" data-sec="3">4. Engineering vs MBA</a><a class="crumb" data-sec="4">5. Your road</a><a class="crumb" data-sec="5">6. Your numbers</a><a class="crumb" data-sec="6">7. Live</a><a class="crumb" data-sec="7">8. After today</a><a class="crumb on" data-sec="8">9. The cell and you</a></div><h1>Count. Contest. Contribute. Cold mail.</h1><p class="dim">Questions now. The targets sheet goes out after the meet.</p></section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+
+// ---------- Store: the only place widgets keep data ----------
+// Every call returns a Promise, so this localStorage version can be swapped for a server (fetch to an API) without
+// touching the widgets. Keys used: "tiers" (object), "leaderboard" (list), "goals" (list). List items carry an id.
+const Store = {
+  _k(k) { return "gs27-deck:" + k; },
+  async get(k, fallback) {
+    try { const v = localStorage.getItem(this._k(k)); return v == null ? fallback : JSON.parse(v); } catch (e) { return fallback; }
+  },
+  async set(k, v) { try { localStorage.setItem(this._k(k), JSON.stringify(v)); } catch (e) {} return v; },
+  async add(k, item) { const a = await this.get(k, []); a.push(item); await this.set(k, a); return a; },
+  async update(k, id, patch) { const a = (await this.get(k, [])).map(x => x.id === id ? Object.assign({}, x, patch) : x); await this.set(k, a); return a; },
+  async remove(k, id) { const a = (await this.get(k, [])).filter(x => x.id !== id); await this.set(k, a); return a; },
+  async clear(k) { try { localStorage.removeItem(this._k(k)); } catch (e) {} return null; },
+};
+const MOBILE = window.matchMedia("(max-width: 760px)").matches;
+// ---------- Live: the shared API (api/entries.js on Vercel). ?api=<origin> overrides the base for local tests ----------
+const API = (new URLSearchParams(location.search).get("api") || "").replace(/\/$/, "");
+const SKEY = "gs27-speaker-key";
+const Live = {
+  key() { try { return sessionStorage.getItem(SKEY) || ""; } catch (e) { return ""; } },
+  gone: new Set(),  // ids deleted in this tab: hidden even if the CDN still serves them for a few seconds
+  async list(kind) {
+    // attendees share the CDN-cached list (about 8 s old at most); the speaker asks past the cache
+    const r = await fetch(API + "/api/entries?kind=" + kind + (SPEAKER ? "&fresh=" + Date.now() : ""), { cache: "no-store" });
+    if (!r.ok) throw new Error("could not load (" + r.status + ")");
+    const cut = this.clearedAt[kind] || 0;
+    return (await r.json()).filter(x => !this.gone.has(x.id) && x.ts > cut);
+  },
+  async add(kind, data) {
+    const r = await fetch(API + "/api/entries", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ kind, data }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || "could not save (" + r.status + ")");
+    return j;
+  },
+  async remove(kind, id) {
+    const r = await fetch(API + "/api/entries?kind=" + kind + "&id=" + encodeURIComponent(id), { method: "DELETE", headers: { "x-speaker-key": this.key() } });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || "could not delete (" + r.status + ")");
+    if (id !== "all") this.gone.add(id);
+    return j;
+  },
+  async clear(kind) { const j = await this.remove(kind, "all"); this.clearedAt[kind] = Date.now(); return j; },
+  clearedAt: {},
+};
+let SPEAKER = false;
+async function initRole() {
+  if (new URLSearchParams(location.search).has("speaker")) {
+    const k = Live.key() || prompt("Speaker passcode") || "";
+    if (k) {
+      try {
+        const r = await fetch(API + "/api/speaker", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ key: k }) });
+        if (r.ok) { try { sessionStorage.setItem(SKEY, k); } catch (e) {} SPEAKER = true; }
+        else { try { sessionStorage.removeItem(SKEY); } catch (e) {} alert("Wrong passcode. You are in attendee mode."); }
+      } catch (e) { alert("Could not check the passcode: " + e.message); }
+    }
+  }
+  document.documentElement.classList.toggle("speaker", SPEAKER);
+  document.dispatchEvent(new Event("rolechange"));
+}
+// run fn now and every ms while the element's slide is on screen
+function pollWhenVisible(sel, fn, ms) {
+  const el = document.querySelector(sel); if (!el) return;
+  const sec = el.closest("section");
+  const visible = () => {
+    if (!MOBILE) return sec.classList.contains("present");
+    const r = sec.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight;
+  };
+  let last = 0;
+  const tick = () => { if (!document.hidden && visible() && Date.now() - last > ms - 200) { last = Date.now(); fn(); } };
+  setInterval(tick, 1000); tick();
+}
+const esc = (t) => String(t).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("[data-jump]"); if (!a) return; e.preventDefault();
+  const secs = [...document.querySelectorAll(".slides > section")];
+  const i = secs.findIndex(s => s.querySelector(".tag") && s.querySelector(".tag").textContent.includes(a.dataset.jump));
+  if (i < 0) return; if (MOBILE) secs[i].scrollIntoView({ behavior: "smooth" }); else Reveal.slide(i);
+});
+initRole();
+if (!MOBILE) Reveal.initialize({width:1280,height:720,margin:0.03,center:false,hash:true,slideNumber:"c/t",transition:"fade",
+keyboardCondition:"focused",plugins:[RevealNotes]});
+document.addEventListener("keydown",e=>{if(["INPUT","SELECT"].includes(document.activeElement.tagName)||document.activeElement.isContentEditable)e.stopPropagation();},true);
+
+const TARGET = {3: 200, 4: 350, 5: 600, 7: 900};
+const MINE = {3: 250, 4: 662, 5: 792, 6: 976, 7: 1005};
+async function cf(handle) {
+  const u = await fetch("https://codeforces.com/api/user.info?handles=" + encodeURIComponent(handle)).then(r => r.json());
+  if (u.status !== "OK") throw new Error("handle not found");
+  const s = await fetch("https://codeforces.com/api/user.status?handle=" + encodeURIComponent(handle)).then(r => r.json());
+  const solved = new Set(s.result.filter(x => x.verdict === "OK").map(x => x.problem.contestId + x.problem.index)).size;
+  return { rating: u.result[0].rating || 0, max: u.result[0].maxRating || 0, solved };
+}
+document.addEventListener("click", async (e) => {
+  if (e.target.id !== "g-go") return;
+  const sem = +document.getElementById("g-sem").value, lc = +document.getElementById("g-lc").value || 0;
+  const handle = document.getElementById("g-cf").value.trim(), out = document.getElementById("g-out");
+  const t = TARGET[sem], pct = Math.round(100 * lc / t);
+  const level = pct >= 150 ? ["Legend", "var(--g)"] : pct >= 100 ? ["On track", "var(--g)"] : pct >= 60 ? ["Catching up", "#ffd166"] : ["Start today", "var(--acc)"];
+  let html = `<div class="lvl" style="color:${level[1]}">${level[0]}</div>
+    <p>LeetCode ${lc} vs Sem ${sem} target ${t}: <b>${pct}%</b>. ${lc >= t ? "Ahead by " + (lc - t) : (t - lc) + " to go"}.</p>
+    <p class="dim">My count at end of Sem ${sem}: about ${MINE[sem]}.</p>`;
+  out.innerHTML = html + (handle ? `<p class="dim">Reading Codeforces for ${handle}...</p>` : "");
+  if (handle) {
+    try { const c = await cf(handle);
+      out.innerHTML = html + `<p>Codeforces <b>${handle}</b>: rating ${c.rating} (peak ${c.max}), ${c.solved} problems solved.</p>`;
+    } catch (err) { out.innerHTML = html + `<p class="dim">Codeforces: ${err.message}.</p>`; }
+  }
+});
+
+
+// ---------- leaderboard (shared through Live) ----------
+let lb = [], lbPending = [];
+const cfRating = {};
+function score(r) { return (r.lc || 0) + Math.round((cfRating[r.cf] || 0) / 2); }
+function lbRows() {
+  const keyOf = r => r.nick + "|" + r.lc + "|" + (r.cf || "");
+  const have = new Set(lb.map(keyOf));
+  lbPending = lbPending.filter(p => !have.has(keyOf(p)) && Date.now() - p.at < 30000);
+  return lb.concat(lbPending);
+}
+function lbRender() {
+  const body = document.getElementById("lb-body"); if (!body) return;
+  const rows = lbRows().sort((a, b) => score(b) - score(a));
+  const medal = ["&#129351;", "&#129352;", "&#129353;"];
+  body.innerHTML = rows.map((r, i) => `<tr class="${r.pending ? "pending" : ""}"><td>${medal[i] || i + 1}</td><td>${esc(r.nick)}</td><td>${r.lc}</td>` +
+    `<td>${r.cf ? (r.cf in cfRating ? (cfRating[r.cf] || "not found") : "...") + ` <span class="dim small">${esc(r.cf)}</span>` : "-"}</td>` +
+    `<td><b>${score(r)}</b></td><td>${r.pending ? '<span class="dim small">sending</span>' : `<button class="rm sp-only" data-kind="leaderboard" data-id="${esc(r.id)}" title="Remove">&#10005;</button>`}</td></tr>`).join("") ||
+    '<tr><td colspan="6" class="dim">No one yet. Add the first brave soul.</td></tr>';
+  for (const r of rows) if (r.cf && !(r.cf in cfRating)) cfFetch(r.cf);
+}
+const cfBusy = new Set();
+async function cfFetch(h) {
+  if (cfBusy.has(h)) return; cfBusy.add(h);
+  try {
+    const u = await fetch("https://codeforces.com/api/user.info?handles=" + encodeURIComponent(h)).then(x => x.json());
+    cfRating[h] = u.status === "OK" ? (u.result[0].rating || 0) : 0;
+  } catch (e) { cfRating[h] = 0; }
+  lbRender();
+}
+async function lbLoad() {
+  const msg = document.getElementById("lb-msg");
+  try { lb = await Live.list("leaderboard"); lbRender(); }
+  catch (e) { if (msg) msg.textContent = "Leaderboard: " + e.message; }
+}
+document.addEventListener("click", async (e) => {
+  if (e.target.id === "lb-add") {
+    const nick = document.getElementById("lb-name").value.trim().slice(0, 24);
+    const lc = Math.max(0, Math.min(5000, parseInt(document.getElementById("lb-lc").value, 10) || 0));
+    const cf = document.getElementById("lb-cf").value.trim().replace(/[^A-Za-z0-9_.-]/g, "").slice(0, 24);
+    const msg = document.getElementById("lb-msg");
+    if (!nick) { msg.textContent = "Add a nickname first."; return; }
+    const p = { id: "tmp" + Date.now(), nick, lc, cf, pending: true, at: Date.now() };
+    lbPending.push(p); lbRender();
+    ["lb-name", "lb-lc", "lb-cf"].forEach(id => document.getElementById(id).value = "");
+    try { await Live.add("leaderboard", { nick, lc, cf }); msg.textContent = "Added " + nick + ". Everyone sees it within about 10 seconds."; setTimeout(lbLoad, 9000); }
+    catch (err) { lbPending = lbPending.filter(x => x !== p); lbRender(); msg.textContent = "Not saved: " + err.message; }
+  }
+  if (e.target.id === "lb-reset" && SPEAKER && confirm("Clear the whole leaderboard for everyone?")) {
+    try { await Live.clear("leaderboard"); lb = []; lbRender(); } catch (err) { alert(err.message); }
+  }
+  const rm = e.target.closest(".rm");
+  if (rm && SPEAKER) {
+    const kind = rm.dataset.kind, id = rm.dataset.id;
+    try {
+      await Live.remove(kind, id);
+      if (kind === "leaderboard") { lb = lb.filter(r => r.id !== id); lbRender(); } else { gb = gb.filter(g => g.id !== id); gbRender(); }
+    } catch (err) { alert(err.message); }
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && ["lb-name", "lb-lc", "lb-cf"].includes(document.activeElement.id)) document.getElementById("lb-add").click();
+}, true);
+// ---------- goals board (shared through Live) ----------
+let gb = [], gbPending = [];
+const WHEN = { "6": "6m", "12": "12m", "24": "2y" };
+function gbRender() {
+  const keyOf = g => g.when + "|" + g.text + "|" + (g.nick || "");
+  const have = new Set(gb.map(keyOf));
+  gbPending = gbPending.filter(p => !have.has(keyOf(p)) && Date.now() - p.at < 30000);
+  const all = gb.concat(gbPending);
+  for (const hz of ["6", "12", "24"]) {
+    const ul = document.getElementById("gb-" + hz); if (!ul) continue;
+    ul.innerHTML = all.filter(g => g.when === WHEN[hz]).map(g => `<li class="${g.pending ? "pending" : ""}">${esc(g.text)} <span class="who">- ${g.nick ? esc(g.nick) : "anonymous"}</span>` +
+      (g.pending ? "" : ` <button class="rm sp-only" data-kind="goals" data-id="${esc(g.id)}" title="Remove">&#10005;</button>`) + `</li>`).join("");
+  }
+}
+async function gbLoad() {
+  const msg = document.getElementById("gb-msg");
+  try { gb = await Live.list("goals"); gbRender(); } catch (e) { if (msg) msg.textContent = "Goals: " + e.message; }
+}
+document.addEventListener("click", async (e) => {
+  if (e.target.id === "gb-add") {
+    const text = document.getElementById("gb-t").value.trim().slice(0, 120); if (!text) return;
+    const g = { id: "tmp" + Date.now(), when: WHEN[document.getElementById("gb-h").value], text, nick: document.getElementById("gb-n").value.trim().slice(0, 24), pending: true, at: Date.now() };
+    document.getElementById("gb-t").value = ""; document.getElementById("gb-n").value = "";
+    gbPending.push(g); gbRender();
+    const msg = document.getElementById("gb-msg");
+    try { await Live.add("goals", { when: g.when, text: g.text, nick: g.nick }); msg.textContent = "Added. Everyone sees it within about 10 seconds."; setTimeout(gbLoad, 9000); }
+    catch (err) { gbPending = gbPending.filter(x => x !== g); gbRender(); msg.textContent = "Not saved: " + err.message; }
+  }
+  if (e.target.id === "gb-reset" && SPEAKER && confirm("Clear all goals for everyone?")) {
+    try { await Live.clear("goals"); gb = []; gbRender(); } catch (err) { alert(err.message); }
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && ["gb-t", "gb-n"].includes(document.activeElement.id)) document.getElementById("gb-add").click();
+}, true);
+pollWhenVisible("#lb-body", lbLoad, 10000);
+pollWhenVisible("#gb-6", gbLoad, 10000);
+// ---------- typewriter ----------
+let twTimer = null;
+function typewriter() {
+  const el = document.getElementById("tw"); if (!el) return;
+  clearTimeout(twTimer); el.textContent = "";
+  const words = ["CPC", "SDC", "managers", "the 2028 batch"]; let w = 0, i = 0, del = false;
+  (function step() {
+    const word = words[w];
+    if (!del) { el.textContent = word.slice(0, ++i); if (i === word.length) { if (w === words.length - 1) return; del = true; twTimer = setTimeout(step, 900); return; } }
+    else { el.textContent = word.slice(0, --i); if (i === 0) { del = false; w++; } }
+    twTimer = setTimeout(step, del ? 60 : 110);
+  })();
+}
+if (MOBILE) {
+  const tw = document.getElementById("tw");
+  if (tw && "IntersectionObserver" in window) new IntersectionObserver((en, ob) => { if (en[0].isIntersecting) { typewriter(); ob.disconnect(); } }).observe(tw);
+  else typewriter();
+} else {
+  Reveal.on("slidechanged", (ev) => { if (ev.currentSlide.querySelector("#tw")) typewriter(); });
+  Reveal.on("ready", (ev) => { if (ev.currentSlide && ev.currentSlide.querySelector("#tw")) typewriter(); });
+}
+
+
+const FIRST = {"0": 2, "1": 4, "2": 12, "3": 13, "4": 15, "5": 18, "6": 23, "7": 26, "8": 28};
+document.addEventListener("click", (e) => {
+  const c = e.target.closest(".crumb, .crumb-link");
+  if (!c) return;
+  if (MOBILE) { const t = document.querySelectorAll(".slides > section")[FIRST[c.dataset.sec]]; if (t) t.scrollIntoView({ behavior: "smooth" }); }
+  else Reveal.slide(FIRST[c.dataset.sec]);
+});
+// ---------- tier list ----------
+const TILES = [{"id": "referral", "name": "Referrals", "tier": "S"}, {"id": "coldmail", "name": "Cold mail", "tier": "S"}, {"id": "wellfound", "name": "Wellfound", "tier": "S"}, {"id": "yc", "name": "YC Work at a Startup", "tier": "A"}, {"id": "instahyre", "name": "Instahyre", "tier": "A"}, {"id": "jackjill", "name": "Jack & Jill", "tier": "A"}, {"id": "cutshort", "name": "Cutshort", "tier": "A"}, {"id": "careers", "name": "Company career pages", "tier": "B"}, {"id": "hirist", "name": "Hirist", "tier": "B"}, {"id": "unstop", "name": "Unstop", "tier": "B"}, {"id": "x", "name": "X / Twitter DMs", "tier": "B"}, {"id": "internshala", "name": "Internshala", "tier": "C"}, {"id": "naukri", "name": "Naukri", "tier": "C"}, {"id": "indeed", "name": "Indeed", "tier": "D"}, {"id": "foundit", "name": "Foundit", "tier": "D"}, {"id": "linkedin", "name": "LinkedIn Easy Apply", "tier": "D"}];
+let state = {};
+async function load() { state = await Store.get("tiers", {}); }
+function save() { Store.set("tiers", state); }
+function initials(n) { return n.split(/[\s&/]+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase(); }
+function allTiles() { return TILES.concat(state.custom || []); }
+function render() {
+  document.querySelectorAll(".tdrop").forEach(d => d.innerHTML = "");
+  for (const t of allTiles()) {
+    const where = (state.place || {})[t.id] || "pool";
+    const el = document.createElement("div");
+    el.className = "tile"; el.dataset.id = t.id;
+    el.innerHTML = (t.logo ? `<img src="${esc(t.logo)}" alt="">` : `<span class="ini">${initials(t.name)}</span>`) + `<span>${esc(t.name)}</span>` + crowdBadge(t.id);
+    const drop = document.querySelector(`.tdrop[data-tier="${where}"]`) || document.querySelector('.tdrop[data-tier="pool"]');
+    if (drop) drop.appendChild(el);
+  }
+}
+let crowd = {};  // tile -> {S: n, A: n, ...}
+function crowdBadge(id) {
+  const c = crowd[id]; if (!c) return "";
+  const [t, n] = Object.entries(c).sort((a, b) => b[1] - a[1])[0];
+  const tot = Object.values(c).reduce((a, b) => a + b, 0);
+  return `<span class="crowd sp-only" title="crowd votes">crowd ${t} &middot; ${n}/${tot}</span>`;
+}
+async function loadCrowd() {
+  const m = document.getElementById("tl-msg");
+  try {
+    const v = await Live.list("tier"); crowd = {};
+    for (const x of v) { crowd[x.tile] = crowd[x.tile] || {}; crowd[x.tile][x.tier] = (crowd[x.tile][x.tier] || 0) + 1; }
+    if (m && SPEAKER) m.textContent = v.length + " crowd votes so far. Green badges show the crowd's top tier per tile.";
+    render();
+  } catch (e) { if (m) m.textContent = "Crowd votes: " + e.message; }
+}
+async function place(id, tier) {
+  state.place = state.place || {}; state.place[id] = tier; save(); render();
+  if (!SPEAKER && ["S", "A", "B", "C", "D", "F"].includes(tier)) {
+    const m = document.getElementById("tl-msg");
+    try { await Live.add("tier", { tile: id, tier }); if (m) m.textContent = "Vote sent: " + tier + "."; }
+    catch (e) { if (m) m.textContent = "Vote not sent: " + e.message; }
+  }
+}
+let picked = null, drag = null;
+document.addEventListener("pointerdown", (e) => {
+  const tile = e.target.closest(".tile");
+  if (!tile) return;
+  e.preventDefault();
+  drag = { id: tile.dataset.id, x: e.clientX, y: e.clientY, ghost: null, moved: false };
+});
+document.addEventListener("pointermove", (e) => {
+  if (!drag) return;
+  if (!drag.moved && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 6) return;
+  if (!drag.ghost) {
+    const src = document.querySelector(`.tile[data-id="${drag.id}"]`);
+    drag.ghost = src.cloneNode(true); drag.ghost.classList.add("ghost"); document.body.appendChild(drag.ghost);
+    src.classList.add("dragging"); drag.moved = true;
+  }
+  drag.ghost.style.left = e.clientX + "px"; drag.ghost.style.top = e.clientY + "px";
+});
+document.addEventListener("pointerup", (e) => {
+  if (!drag) {
+    const row = e.target.closest(".tdrop");
+    if (row && picked && !e.target.closest(".tile")) { place(picked, row.dataset.tier); picked = null; }
+    return;
+  }
+  const d = drag; drag = null;
+  if (d.ghost) {
+    d.ghost.remove();
+    const under = document.elementFromPoint(e.clientX, e.clientY);
+    const row = under && under.closest(".tdrop");
+    if (row) place(d.id, row.dataset.tier); else render();
+  } else {
+    picked = picked === d.id ? null : d.id;
+    document.querySelectorAll(".tile").forEach(t => t.classList.toggle("picked", t.dataset.id === picked));
+  }
+});
+document.addEventListener("click", (e) => {
+  if (e.target.id === "tl-reset") { state = { custom: state.custom || [] }; save(); render(); }
+  if (e.target.id === "tl-sugg") { state.place = {}; for (const t of TILES) state.place[t.id] = t.tier; save(); render(); }
+  if (e.target.id === "tl-add") {
+    const name = prompt("Name of the place to apply"); if (!name) return;
+    const logo = prompt("Logo image URL (optional)") || "";
+    state.custom = state.custom || []; state.custom.push({ id: "c" + Date.now(), name: name.slice(0, 40), logo: /^https?:\/\//.test(logo) ? logo : "", tier: "pool" });
+    save(); render();
+  }
+});
+document.addEventListener("click", async (e) => {
+  if (e.target.id === "tl-clearvotes" && SPEAKER && confirm("Clear all crowd votes?")) {
+    try { await Live.clear("tier"); crowd = {}; render(); } catch (err) { alert(err.message); }
+  }
+});
+load().then(render);
+pollWhenVisible(".tierwrap", loadCrowd, 10000);
+</script></body></html>
