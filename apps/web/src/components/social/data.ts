@@ -1,4 +1,5 @@
 import { createClient, hasSupabase } from "@/lib/supabase/server";
+import { groupHref, type CollegeCtx } from "./college";
 import type { GroupChip } from "./types";
 
 type DB = Awaited<ReturnType<typeof createClient>>;
@@ -18,12 +19,12 @@ export async function myVotes(supabase: DB, signedIn: boolean, type: "post" | "c
 }
 
 /** Group name and slug for each group id that appears in a list of posts. */
-export async function groupChips(supabase: DB, ids: (number | null)[]) {
+export async function groupChips(supabase: DB, ids: (number | null)[], ctx: CollegeCtx) {
   const out = new Map<number, GroupChip>();
   const uniq = [...new Set(ids.filter((x): x is number => x !== null))];
   if (uniq.length === 0) return out;
-  const { data } = await supabase.from("groups").select("id, slug, name").in("id", uniq);
-  for (const g of data ?? []) out.set(g.id, { slug: g.slug, name: g.name });
+  const { data } = await supabase.from("groups").select("id, slug, name, college_id").in("id", uniq);
+  for (const g of data ?? []) out.set(g.id, { slug: g.slug, name: g.name, href: groupHref(ctx, g.slug, g.college_id) });
   return out;
 }
 
@@ -34,10 +35,11 @@ export async function myGroupIds(supabase: DB, userId: string | undefined) {
   return new Set((data ?? []).map((r) => Number(r.group_id)));
 }
 
-/** Member count per group id. Fine at college scale; swap for a counter column if it grows. */
-export async function memberCounts(supabase: DB) {
+/** Member count per group id, for the given groups. Fine at college scale; swap for a counter column if it grows. */
+export async function memberCounts(supabase: DB, groupIds: number[]) {
   const out = new Map<number, number>();
-  const { data } = await supabase.from("group_members").select("group_id");
+  if (groupIds.length === 0) return out;
+  const { data } = await supabase.from("group_members").select("group_id").in("group_id", groupIds);
   for (const r of data ?? []) out.set(Number(r.group_id), (out.get(Number(r.group_id)) ?? 0) + 1);
   return out;
 }

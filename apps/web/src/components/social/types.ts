@@ -1,4 +1,4 @@
-// Row shapes of the v_posts and v_comments views (supabase/migrations/0001_init.sql).
+// Row shapes of the v_posts and v_comments views (0001_init.sql, college_id added in 0006_colleges.sql).
 export type PostRow = {
   id: number;
   group_id: number | null;
@@ -16,6 +16,7 @@ export type PostRow = {
   author_batch: number | null;
   author_verified: boolean | null;
   is_mine: boolean | null;
+  college_id: number;
 };
 
 export type CommentRow = {
@@ -33,6 +34,7 @@ export type CommentRow = {
   author_batch: number | null;
   author_verified: boolean | null;
   is_mine: boolean | null;
+  college_id: number;
 };
 
 export type GroupRow = {
@@ -45,16 +47,19 @@ export type GroupRow = {
   batch: number | null;
   verified_only: boolean;
   created_at: string;
+  college_id: number;
 };
 
-export type GroupChip = { slug: string; name: string };
+export const GROUP_COLS = "id, slug, name, description, kind, branch, batch, verified_only, created_at, college_id";
+
+export type GroupChip = { slug: string; name: string; href: string };
 
 export type ActionState = { error?: string; ok?: boolean } | undefined;
 
 export const POST_COLS =
-  "id, group_id, title, body, resource_id, score, comment_count, hidden, created_at, anonymous, author_id, author_handle, author_branch, author_batch, author_verified, is_mine";
+  "id, group_id, title, body, resource_id, score, comment_count, hidden, created_at, anonymous, author_id, author_handle, author_branch, author_batch, author_verified, is_mine, college_id";
 
 export const COMMENT_COLS =
-  "id, post_id, parent_id, body, score, hidden, created_at, anonymous, author_id, author_handle, author_branch, author_batch, author_verified, is_mine";
+  "id, post_id, parent_id, body, score, hidden, created_at, anonymous, author_id, author_handle, author_branch, author_batch, author_verified, is_mine, college_id";
 
 export const PAGE_SIZE = 20;

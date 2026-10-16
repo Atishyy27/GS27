@@ -5,6 +5,7 @@ import { BATCH_OPTIONS, BRANCH_OPTIONS } from "@/lib/catalog";
 import { createClient } from "@/lib/supabase/server";
 import { ago } from "@/lib/time";
 import { requireOnboarded } from "@/lib/viewer";
+import { listColleges } from "@/lib/college";
 import { deleteMine, saveProfile } from "./actions";
 
 export const metadata = { title: "Me · GS27" };
@@ -16,6 +17,12 @@ export default async function Me() {
   const v = await requireOnboarded("/me");
   const p = v.profile;
   const supabase = await createClient();
+  const colleges = await listColleges();
+  const college = colleges.find((c) => c.id === p.college_id);
+  const domains = college?.email_domains.map((d) => `@${d}`).join(" or ") || "college";
+  const branchOptions = college?.branches.length
+    ? college.branches.map((code) => ({ code, name: BRANCH_OPTIONS.find((b) => b.code === code)?.name ?? code }))
+    : BRANCH_OPTIONS;
   const [{ data: posts }, { data: comments }] = await Promise.all([
     supabase.from("v_posts").select("id, title, body, anonymous, hidden, score, comment_count, created_at")
       .eq("is_mine", true).order("created_at", { ascending: false }).limit(50),
@@ -28,14 +35,21 @@ export default async function Me() {
       <p className="text-xs font-bold tracking-[0.2em] text-accent">YOU</p>
       <h1 className="mt-2 break-all text-3xl font-extrabold">@{p.handle}</h1>
       <div className="mt-2"><Badge verified={p.verified} branch={p.branch} batch={p.batch} /></div>
+      <p className="mt-2 text-sm text-dim">
+        {college?.name ?? "No college picked"}{" "}
+        {p.verified ? <span className="text-good">· verified via your college email</span> : (
+          <><span className="text-faint">· not verified</span> · <Link href="/onboarding?next=/me" className="text-accent hover:underline">change college</Link></>
+        )}
+      </p>
       {p.role !== "user" && <p className="mt-2 text-xs text-accent">Role: {p.role}. <Link href="/mod" className="underline">Open mod tools</Link></p>}
 
       {!p.verified && (
         <section className="mt-8 rounded-2xl border border-good/30 bg-good/5 p-5">
-          <h2 className="font-bold">Verify with your @sgsits.ac.in account</h2>
+          <h2 className="font-bold">Verify with your {domains} account</h2>
           <p className="mt-2 text-sm text-dim">
-            Link your college Google account once and you get the ✓ SGSITS badge, plus entry to verified-only groups.
-            Your college email is never shown to anyone. Your handle stays the same.
+            Link your college Google account once and you are verified for that college: you get the ✓ badge, plus entry to
+            verified-only groups. If the account belongs to a different college than the one you picked, you move to that
+            college. Your college email is never shown to anyone. Your handle stays the same.
           </p>
           <div className="mt-4 max-w-sm">
             <GoogleButton link college next="/me">Link college account</GoogleButton>
@@ -49,7 +63,7 @@ export default async function Me() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <label className="flex flex-col gap-2 text-sm text-dim">Branch
               <select name="branch" defaultValue={p.branch ?? ""} required className="rounded-xl border border-white/15 bg-bg px-3 py-3 text-base text-fg">
-                {BRANCH_OPTIONS.map((b) => <option key={b.code} value={b.code}>{b.code} · {b.name}</option>)}
+                {branchOptions.map((b) => <option key={b.code} value={b.code}>{b.code} · {b.name}</option>)}
               </select>
             </label>
             <label className="flex flex-col gap-2 text-sm text-dim">Batch

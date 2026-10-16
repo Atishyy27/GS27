@@ -75,6 +75,7 @@ export async function joinGroup(groupId: number): Promise<ActionState> {
   const { error: e } = await supabase.from("group_members").insert({ group_id: groupId, user_id: userId });
   if (e) {
     if (e.message.includes("row-level security")) return { error: "You cannot join this group yet. Finish onboarding, or verify with your college account for verified-only groups." };
+    if (e.message.includes("another college")) return { error: "This group belongs to another college. You can read it, and join groups of your own college." };
     if (e.message.includes("duplicate")) return { ok: true };
     return { error: e.message };
   }
@@ -106,7 +107,7 @@ export async function createGroup(_: ActionState, form: FormData): Promise<Actio
   if (e) return { error: e.message.includes("duplicate") ? "That link name is taken." : e.message };
   await supabase.from("group_members").insert({ group_id: data.id, user_id: userId });
   refresh();
-  redirect(`/g/${slug}`);
+  redirect(`/g/${slug}`); // new groups belong to the creator's college, which is the one they post in
 }
 
 export async function follow(profileId: string): Promise<ActionState> {

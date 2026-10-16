@@ -1,19 +1,27 @@
 import Link from "next/link";
 import { createClient, hasSupabase } from "@/lib/supabase/server";
-import { getViewer, isMod } from "@/lib/viewer";
+import { getViewer } from "@/lib/viewer";
+import { collegeCtx, foreignName, isModHere, type CollegeCtx } from "@/components/social/college";
 import { ago } from "@/lib/time";
 import ProjectCard from "@/components/hall/ProjectCard";
 import ReviewButtons from "@/components/hall/ReviewButtons";
 import { PROJECT_COLUMNS, type ProjectRow } from "@/components/hall/data";
 
-export const metadata = { title: "Hall of Fame · GS27", description: "Projects built by SGSITS students." };
+export const metadata = { title: "Hall of Fame · GS27", description: "Projects built by college students." };
 
-type Search = { tag?: string; sort?: string; pending?: string };
+type Search = { tag?: string; sort?: string; pending?: string; scope?: string };
+
+const detailHref = (ctx: CollegeCtx, p: ProjectRow) => {
+  const c = p.college_id !== ctx.college.id ? ctx.slugs.get(p.college_id) : undefined;
+  return `/hall/${p.slug}${c ? `?c=${encodeURIComponent(c)}` : ""}`;
+};
 
 export default async function Hall({ searchParams }: { searchParams: Promise<Search> }) {
-  const { tag, sort = "top", pending } = await searchParams;
+  const { tag, sort = "top", pending, scope } = await searchParams;
   const v = await getViewer();
-  const mod = isMod(v);
+  const ctx = await collegeCtx(v);
+  const everywhere = scope === "all";
+  const mod = isModHere(v, ctx.college);
   const showPending = mod && pending === "1";
 
   let projects: ProjectRow[] = [];
@@ -25,11 +33,14 @@ export default async function Hall({ searchParams }: { searchParams: Promise<Sea
   if (hasSupabase) {
     const supabase = await createClient();
     let q = supabase.from("v_projects").select(PROJECT_COLUMNS).eq("status", "approved");
+    if (!everywhere) q = q.eq("college_id", ctx.college.id);
     if (tag) q = q.contains("tags", [tag]);
     q = sort === "new" ? q.order("created_at", { ascending: false }) : q.order("score", { ascending: false }).order("created_at", { ascending: false });
     const [{ data: list }, { data: tagRows }] = await Promise.all([
       q.limit(120),
-      supabase.from("v_projects").select("tags").eq("status", "approved").limit(500),
+      everywhere
+        ? supabase.from("v_projects").select("tags").eq("status", "approved").limit(500)
+        : supabase.from("v_projects").select("tags").eq("status", "approved").eq("college_id", ctx.college.id).limit(500),
     ]);
     projects = (list ?? []) as ProjectRow[];
     allTags = Array.from(new Set((tagRows ?? []).flatMap((r) => (r as { tags: string[] }).tags))).sort();
@@ -42,7 +53,8 @@ export default async function Hall({ searchParams }: { searchParams: Promise<Sea
       mine = (own ?? []) as ProjectRow[];
     }
     if (showPending) {
-      const { data } = await supabase.from("v_projects").select(PROJECT_COLUMNS).eq("status", "pending").order("created_at");
+      const { data } = await supabase.from("v_projects").select(PROJECT_COLUMNS).eq("status", "pending")
+        .eq("college_id", ctx.college.id).order("created_at");
       queue = (data ?? []) as ProjectRow[];
     }
   }
@@ -51,8 +63,10 @@ export default async function Hall({ searchParams }: { searchParams: Promise<Sea
     const s = new URLSearchParams();
     const t = "tag" in p ? p.tag : tag;
     const so = p.sort ?? sort;
+    const sc = "scope" in p ? p.scope : scope;
     if (t) s.set("tag", t);
     if (so !== "top") s.set("sort", so);
+    if (sc === "all") s.set("scope", "all");
     const qs = s.toString();
     return `/hall${qs ? `?${qs}` : ""}`;
   };
@@ -62,9 +76,9 @@ export default async function Hall({ searchParams }: { searchParams: Promise<Sea
       <section className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-2xl">
           <p className="text-xs font-bold tracking-[0.2em] text-accent">HALL OF FAME</p>
-          <h1 className="mt-2 text-4xl font-extrabold leading-tight sm:text-6xl">Built at SGSITS.</h1>
+          <h1 className="mt-2 text-4xl font-extrabold leading-tight sm:text-6xl">{everywhere ? "Built by students." : `Built at ${ctx.college.short_name}.`}</h1>
           <p className="mt-3 text-dim">
-            Tools, apps and hacks made by students of this college. Use them, star them, and put yours up here.
+            {everywhere ? "Tools, apps and hacks made by students of every college on GS27." : "Tools, apps and hacks made by students of this college."} Use them, star them, and put yours up here.
           </p>
         </div>
         <Link href="/hall/submit" className="self-start rounded-full bg-accent px-5 py-2.5 font-bold text-bg sm:self-auto">
@@ -94,7 +108,7 @@ export default async function Hall({ searchParams }: { searchParams: Promise<Sea
             {queue.map((p) => (
               <li key={p.id} className="flex flex-col gap-2 rounded-xl bg-card p-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
-                  <Link href={`/hall/${p.slug}`} className="font-semibold hover:text-accent">{p.name}</Link>
+                  <Link href={detailHref(ctx, p)} className="font-semibold hover:text-accent">{p.name}</Link>
                   <p className="truncate text-sm text-dim">{p.tagline || p.description.slice(0, 120)}</p>
                   <p className="text-xs text-faint">
                     {p.builders ? `by ${p.builders} · ` : ""}{ago(p.created_at)}
@@ -123,7 +137,11 @@ export default async function Hall({ searchParams }: { searchParams: Promise<Sea
       )}
 
       <div className="mt-8 flex flex-wrap items-center gap-2">
-        <span className="mr-1 text-sm text-faint">Sort</span>
+        {[[undefined, ctx.college.short_name], ["all", "All colleges"]].map(([k, l]) => (
+          <Link key={l} href={href({ scope: k })}
+            className={`rounded-full px-3 py-1 text-sm ${(k === "all") === everywhere ? "bg-accent font-bold text-bg" : "border border-white/15 text-dim hover:text-fg"}`}>{l}</Link>
+        ))}
+        <span className="ml-3 mr-1 text-sm text-faint">Sort</span>
         {[["top", "Top"], ["new", "New"]].map(([k, l]) => (
           <Link key={k} href={href({ sort: k })}
             className={`rounded-full px-3 py-1 text-sm ${sort === k ? "bg-fg text-bg" : "border border-white/15 text-dim hover:text-fg"}`}>{l}</Link>
@@ -144,7 +162,9 @@ export default async function Hall({ searchParams }: { searchParams: Promise<Sea
       )}
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => <ProjectCard key={p.id} p={p} voted={voted.has(p.id)} signedIn={Boolean(v)} />)}
+        {projects.map((p) => (
+          <ProjectCard key={p.id} p={p} voted={voted.has(p.id)} signedIn={Boolean(v)} from={foreignName(ctx, p.college_id)} href={detailHref(ctx, p)} />
+        ))}
       </div>
     </main>
   );

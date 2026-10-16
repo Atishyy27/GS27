@@ -13,9 +13,10 @@ export function ProjectTile({ p, className = "" }: { p: ProjectRow; className?: 
   );
 }
 
-export function Chips({ p }: { p: ProjectRow }) {
+export function Chips({ p, from }: { p: ProjectRow; from?: string | null }) {
   return (
     <div className="flex flex-wrap gap-1.5">
+      {from && <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[11px] text-accent">{from}</span>}
       {(p.branch || p.batch) && (
         <span className="rounded-full border border-white/15 px-2 py-0.5 text-[11px] text-dim">
           {[p.branch, p.batch].filter(Boolean).join(" · ")}
@@ -30,18 +31,21 @@ export function Chips({ p }: { p: ProjectRow }) {
   );
 }
 
-export default function ProjectCard({ p, voted, signedIn }: { p: ProjectRow; voted: boolean; signedIn: boolean }) {
+/** href: the detail link; projects of another college carry ?c=<slug> because slugs are unique per college. */
+export default function ProjectCard({ p, voted, signedIn, from, href = `/hall/${p.slug}` }: {
+  p: ProjectRow; voted: boolean; signedIn: boolean; from?: string | null; href?: string;
+}) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-card transition hover:border-white/25">
-      <Link href={`/hall/${p.slug}`} className="block">
+      <Link href={href} className="block">
         <ProjectTile p={p} className="h-36" />
       </Link>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div>
-          <Link href={`/hall/${p.slug}`} className="text-lg font-bold hover:text-accent">{p.name}</Link>
+          <Link href={href} className="text-lg font-bold hover:text-accent">{p.name}</Link>
           {p.tagline && <p className="mt-1 text-sm text-dim">{p.tagline}</p>}
         </div>
-        <Chips p={p} />
+        <Chips p={p} from={from} />
         <div className="mt-auto flex items-center justify-between gap-3 pt-1">
           <p className="truncate text-xs text-faint">{p.builders ? `by ${p.builders}` : "builders not added yet"}</p>
           <HeartButton projectId={p.id} score={p.score} voted={voted} signedIn={signedIn} />

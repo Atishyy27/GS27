@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Badge from "@/components/Badge";
 import ActionButton from "@/components/social/ActionButton";
 import { follow, unfollow } from "@/components/social/actions";
+import { collegeCtx } from "@/components/social/college";
 import { db } from "@/components/social/data";
 import { BackendMissing } from "@/components/social/Notice";
 import PostList from "@/components/social/PostList";
@@ -23,11 +24,13 @@ export default async function UserPage({ params, searchParams }: {
   if (!supabase) {
     return <main className="mx-auto w-full max-w-2xl flex-1 px-4 pb-16 pt-20"><BackendMissing /></main>;
   }
-  const { data: prof } = await supabase.from("profiles").select("id, handle, branch, batch, verified, bio, created_at")
+  const { data: prof } = await supabase.from("profiles").select("id, handle, branch, batch, verified, bio, created_at, college_id")
     .eq("handle", handle).maybeSingle();
   if (!prof) notFound();
 
   const v = await getViewer();
+  const ctx = await collegeCtx(v);
+  const collegeName = prof.college_id ? ctx.names.get(prof.college_id) ?? null : null;
   const isMe = v?.userId === prof.id;
   const [followers, following, amFollowing, postsRes] = await Promise.all([
     supabase.from("follows").select("followee_id", { count: "exact", head: true }).eq("followee_id", prof.id),
@@ -48,7 +51,10 @@ export default async function UserPage({ params, searchParams }: {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0">
             <h1 className="break-all text-2xl font-extrabold">@{prof.handle}</h1>
-            <div className="mt-2"><Badge verified={prof.verified} branch={prof.branch} batch={prof.batch} /></div>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <Badge verified={prof.verified} branch={prof.branch} batch={prof.batch} />
+              {collegeName && <span className="rounded-full bg-white/5 px-2 py-0.5 text-[11px] text-dim">{collegeName}</span>}
+            </div>
           </div>
           {v && !isMe && (amFollowing.data ? (
             <ActionButton run={unfollow.bind(null, prof.id)} className="rounded-full border border-white/20 px-4 py-1.5 text-sm text-dim hover:border-white/50">

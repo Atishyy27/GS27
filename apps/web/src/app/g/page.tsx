@@ -1,9 +1,10 @@
 import Link from "next/link";
 import CreateGroupForm from "@/components/social/CreateGroupForm";
+import { collegeCtx } from "@/components/social/college";
 import { db, memberCounts, myGroupIds } from "@/components/social/data";
 import JoinButton from "@/components/social/JoinButton";
-import { BackendMissing, Empty, SignInPrompt } from "@/components/social/Notice";
-import type { GroupRow } from "@/components/social/types";
+import { BackendMissing, Empty, SignInPrompt, ViewingElsewhere } from "@/components/social/Notice";
+import { GROUP_COLS, type GroupRow } from "@/components/social/types";
 import { getViewer } from "@/lib/viewer";
 
 export const metadata = { title: "Groups · GS27" };
@@ -12,19 +13,19 @@ const KIND_ORDER: Record<string, number> = { placecom: 0, branch: 1, batch: 2, s
 
 export default async function Groups() {
   const v = await getViewer();
-  const onboarded = Boolean(v?.profile?.branch && v.profile.batch);
+  const onboarded = Boolean(v?.profile?.branch && v.profile.batch && v.profile.college_id);
   const supabase = await db();
+  const ctx = await collegeCtx(v);
   let groups: GroupRow[] = [];
   let counts = new Map<number, number>();
   let mine = new Set<number>();
   if (supabase) {
-    const [g, c, m] = await Promise.all([
-      supabase.from("groups").select("id, slug, name, description, kind, branch, batch, verified_only, created_at"),
-      memberCounts(supabase),
+    const [g, m] = await Promise.all([
+      supabase.from("groups").select(GROUP_COLS).eq("college_id", ctx.college.id),
       myGroupIds(supabase, v?.userId),
     ]);
     groups = (g.data ?? []) as GroupRow[];
-    counts = c;
+    counts = await memberCounts(supabase, groups.map((x) => x.id));
     mine = m;
   }
   const myBranch = v?.profile?.branch;
@@ -46,18 +47,18 @@ export default async function Groups() {
         {g.description && <p className="mt-1 line-clamp-2 text-sm text-dim">{g.description}</p>}
         <p className="mt-1 text-xs text-faint">{counts.get(g.id) ?? 0} members</p>
       </div>
-      <JoinButton groupId={g.id} joined={mine.has(g.id)} signedIn={Boolean(v)} next="/g" />
+      {!ctx.elsewhere && <JoinButton groupId={g.id} joined={mine.has(g.id)} signedIn={Boolean(v)} next="/g" />}
     </li>
   );
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-4 pb-16 pt-20">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold">Groups</h1>
-        {supabase && onboarded && <CreateGroupForm />}
+        <h1 className="text-2xl font-extrabold">Groups <span className="text-base font-semibold text-dim">· {ctx.college.short_name}</span></h1>
+        {supabase && onboarded && !ctx.elsewhere && <CreateGroupForm collegeName={ctx.college.short_name} />}
       </div>
       <div className="mt-4">
-        {!supabase ? <BackendMissing /> : !v ? <SignInPrompt next="/g" /> : !onboarded ? <SignInPrompt next="/g" onboard /> : null}
+        {!supabase ? <BackendMissing /> : !v ? <SignInPrompt next="/g" /> : !onboarded ? <SignInPrompt next="/g" onboard /> : ctx.elsewhere ? <ViewingElsewhere name={ctx.college.short_name} /> : null}
       </div>
       {joined.length > 0 && (
         <section className="mt-6">

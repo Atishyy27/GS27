@@ -6,7 +6,7 @@ import type { ActionState } from "./types";
 
 const toSlug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
 
-export default function CreateGroupForm() {
+export default function CreateGroupForm({ collegeName = "college" }: { collegeName?: string }) {
   const [state, action, pending] = useActionState<ActionState, FormData>(createGroup, undefined);
   const [open, setOpen] = useState(false);
   const [slug, setSlug] = useState("");
@@ -30,7 +30,7 @@ export default function CreateGroupForm() {
       </label>
       <label className="flex items-center gap-2 text-sm text-dim">
         <input type="checkbox" name="verified_only" className="accent-[#ff5a36]" />
-        Verified only (only @sgsits.ac.in accounts can join)
+        Verified only (only accounts verified with a {collegeName} email can join)
       </label>
       <div className="flex gap-3">
         <button disabled={pending} className="rounded-full bg-accent px-4 py-1.5 text-sm font-bold text-bg disabled:opacity-50">

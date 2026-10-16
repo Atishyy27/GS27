@@ -19,6 +19,15 @@ export function SignInPrompt({ next, onboard }: { next: string; onboard?: boolea
   );
 }
 
+/** Shown instead of a composer when a signed-in user is viewing a college that is not their own. */
+export function ViewingElsewhere({ name }: { name: string }) {
+  return (
+    <p className="rounded-2xl border border-white/10 bg-card p-4 text-sm text-dim">
+      You are viewing {name}. You can read, and post in your own college.
+    </p>
+  );
+}
+
 export function Empty({ children }: { children: React.ReactNode }) {
   return <p className="rounded-2xl border border-dashed border-white/10 p-6 text-center text-sm text-faint">{children}</p>;
 }

@@ -1,4 +1,4 @@
-// Row shape of the v_projects view (supabase/migrations/0005_hall.sql).
+// Row shape of the v_projects view (0005_hall.sql, college_id added in 0006_colleges.sql).
 export type ProjectRow = {
   id: number;
   slug: string;
@@ -16,12 +16,13 @@ export type ProjectRow = {
   score: number;
   created_at: string;
   is_mine: boolean | null;
+  college_id: number;
 };
 
 export type HallState = { ok?: boolean; error?: string; slug?: string } | undefined;
 
 export const PROJECT_COLUMNS =
-  "id, slug, name, tagline, description, url, repo_url, image_url, tags, builders, batch, branch, status, score, created_at, is_mine";
+  "id, slug, name, tagline, description, url, repo_url, image_url, tags, builders, batch, branch, status, score, created_at, is_mine, college_id";
 
 /** A stable two-colour gradient per project, for projects without an image. */
 export function tileGradient(seed: string): string {

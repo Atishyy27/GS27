@@ -24,6 +24,17 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
           Continue with another Google account
         </GoogleButton>
       </div>
+      <div className="mt-8 rounded-2xl border border-white/10 p-4">
+        <p className="text-sm font-semibold">Just looking around?</p>
+        <p className="mt-1 text-xs text-dim">
+          Guests can read the library, the feed, groups, drives and the Hall of Fame, and play the game. Posting, uploading,
+          voting, joining groups, registering for drives and applying for jobs need a sign-in.
+        </p>
+        <a href={`/guest?next=${encodeURIComponent(next === "/feed" ? "/library" : next)}`}
+          className="mt-3 inline-block rounded-xl border border-white/20 px-4 py-2 text-sm font-semibold hover:border-white/50">
+          Continue as guest
+        </a>
+      </div>
       <p className="mt-6 text-xs text-faint">Admins can see who posted something only when it is reported, and every such look is logged.</p>
     </main>
   );

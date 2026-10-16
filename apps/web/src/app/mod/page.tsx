@@ -4,7 +4,9 @@ import { Handle } from "@/components/Badge";
 import ModActions from "@/components/mod/ModActions";
 import { createClient } from "@/lib/supabase/server";
 import { ago } from "@/lib/time";
-import { getViewer, isMod } from "@/lib/viewer";
+import { getViewer } from "@/lib/viewer";
+import { getCollege } from "@/lib/college";
+import { isAdminHere, isModHere } from "@/components/social/college";
 
 export const metadata = { title: "Moderation · GS27" };
 
@@ -17,30 +19,32 @@ type LogRow = { id: number; actor_id: string; action: string; target_type: strin
 
 export default async function Mod({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   const v = await getViewer();
-  if (!isMod(v)) notFound();
-  const isAdmin = v?.profile?.role === "admin";
+  const college = await getCollege();
+  // roles act per college: a mod of one college sees nothing of another (platform admins see any)
+  if (!isModHere(v, college)) notFound();
+  const isAdmin = isAdminHere(v, college);
   const { tab } = await searchParams;
   const showLog = tab === "log";
   const supabase = await createClient();
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 pb-16 pt-20">
-      <p className="text-xs font-bold tracking-[0.2em] text-accent">MODERATION</p>
+      <p className="text-xs font-bold tracking-[0.2em] text-accent">MODERATION · {college.short_name.toUpperCase()}</p>
       <h1 className="mt-2 text-3xl font-extrabold">{showLog ? "Mod log" : "Reports"}</h1>
       <div className="mt-4 flex gap-2 text-sm">
         <Link href="/mod" className={`rounded-full px-3 py-1 ${!showLog ? "bg-accent font-bold text-bg" : "border border-white/15 text-dim"}`}>Queue</Link>
         <Link href="/mod?tab=log" className={`rounded-full px-3 py-1 ${showLog ? "bg-accent font-bold text-bg" : "border border-white/15 text-dim"}`}>Log</Link>
       </div>
-      {showLog ? <ModLog supabase={supabase} /> : <Queue supabase={supabase} isAdmin={isAdmin} />}
+      {showLog ? <ModLog supabase={supabase} collegeId={college.id} /> : <Queue supabase={supabase} isAdmin={isAdmin} collegeId={college.id} />}
     </main>
   );
 }
 
 type Supa = Awaited<ReturnType<typeof createClient>>;
 
-async function Queue({ supabase, isAdmin }: { supabase: Supa; isAdmin: boolean }) {
+async function Queue({ supabase, isAdmin, collegeId }: { supabase: Supa; isAdmin: boolean; collegeId: number }) {
   const { data } = await supabase.from("reports").select("id, target_type, target_id, reason, created_at")
-    .eq("status", "open").order("created_at", { ascending: true }).limit(500);
+    .eq("college_id", collegeId).eq("status", "open").order("created_at", { ascending: true }).limit(500);
   const reports = (data as Report[] | null) ?? [];
 
   // group reports by target
@@ -110,8 +114,9 @@ async function Queue({ supabase, isAdmin }: { supabase: Supa; isAdmin: boolean }
   );
 }
 
-async function ModLog({ supabase }: { supabase: Supa }) {
+async function ModLog({ supabase, collegeId }: { supabase: Supa; collegeId: number }) {
   const { data } = await supabase.from("mod_actions").select("id, actor_id, action, target_type, target_id, note, created_at")
+    .eq("college_id", collegeId)
     .order("created_at", { ascending: false }).limit(200);
   const rows = (data as LogRow[] | null) ?? [];
   const actorIds = [...new Set(rows.map((r) => r.actor_id))];

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Composer from "@/components/social/Composer";
+import { collegeCtx } from "@/components/social/college";
 import { daysAgoIso, db, myGroupIds } from "@/components/social/data";
-import { BackendMissing, SignInPrompt } from "@/components/social/Notice";
+import { BackendMissing, SignInPrompt, ViewingElsewhere } from "@/components/social/Notice";
 import PostList from "@/components/social/PostList";
 import { PAGE_SIZE, POST_COLS, type PostRow } from "@/components/social/types";
 import { getViewer } from "@/lib/viewer";
@@ -21,14 +22,15 @@ export default async function Feed({ searchParams }: { searchParams: Promise<{ t
   const tab: Tab = TABS.some((t) => t.key === sp.tab) ? (sp.tab as Tab) : "latest";
   const page = Math.max(1, Number(sp.page) || 1);
   const v = await getViewer();
-  const onboarded = Boolean(v?.profile?.branch && v.profile.batch);
+  const onboarded = Boolean(v?.profile?.branch && v.profile.batch && v.profile.college_id);
   const supabase = await db();
+  const ctx = await collegeCtx(v);
 
   let posts: PostRow[] = [];
   let note: string | null = null;
   if (supabase) {
     const to = page * PAGE_SIZE; // fetch one extra to know if there is more
-    let q = supabase.from("v_posts").select(POST_COLS);
+    let q = supabase.from("v_posts").select(POST_COLS).eq("college_id", ctx.college.id);
     if (tab === "following") {
       if (!v) note = "Sign in to see posts from handles you follow.";
       else {
@@ -58,9 +60,9 @@ export default async function Feed({ searchParams }: { searchParams: Promise<{ t
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-4 pb-16 pt-20">
-      <h1 className="text-2xl font-extrabold">Feed</h1>
+      <h1 className="text-2xl font-extrabold">Feed <span className="text-base font-semibold text-dim">· {ctx.college.short_name}</span></h1>
       <div className="mt-4">
-        {!supabase ? <BackendMissing /> : !v ? <SignInPrompt next="/feed" /> : !onboarded ? <SignInPrompt next="/feed" onboard /> : <Composer />}
+        {!supabase ? <BackendMissing /> : !v ? <SignInPrompt next="/feed" /> : !onboarded ? <SignInPrompt next="/feed" onboard /> : ctx.elsewhere ? <ViewingElsewhere name={ctx.college.short_name} /> : <Composer />}
       </div>
       <nav className="mt-6 flex gap-2 overflow-x-auto border-b border-white/10 pb-2 text-sm">
         {TABS.map((t) => (

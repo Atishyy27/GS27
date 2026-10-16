@@ -2,16 +2,18 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient, hasSupabase } from "@/lib/supabase/server";
-import { getViewer, isMod } from "@/lib/viewer";
+import { getCollege } from "@/lib/college";
+import { getViewer } from "@/lib/viewer";
+import { isAdminHere, isModHere } from "@/components/social/college";
 
 type ItemType = "post" | "comment" | "resource";
 const ITEM_TYPES: ItemType[] = ["post", "comment", "resource"];
 
 async function modClient() {
   if (!hasSupabase) return null;
-  const v = await getViewer();
-  if (!isMod(v)) return null;
-  return createClient();
+  const [v, college] = await Promise.all([getViewer(), getCollege()]);
+  if (!isModHere(v, college)) return null;
+  return createClient(); // the SQL functions re-check the item's college
 }
 
 /** Hide or restore a post, comment or resource. The moderate() function logs it and closes open reports. */
@@ -36,8 +38,8 @@ export async function dismissItem(type: string, id: string, note: string): Promi
 /** Admins only. Returns the author's email and handle; reveal_author() writes the log entry. */
 export async function revealAuthor(type: string, id: number, reason: string): Promise<{ email?: string; handle?: string; error?: string }> {
   if (!hasSupabase) return { error: "Backend not configured." };
-  const v = await getViewer();
-  if (v?.profile?.role !== "admin") return { error: "Admins only." };
+  const [v, college] = await Promise.all([getViewer(), getCollege()]);
+  if (!isAdminHere(v, college)) return { error: "Admins only." };
   if (reason.trim().length < 10) return { error: "Give a reason of at least 10 characters." };
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("reveal_author", { p_type: type, p_id: id, p_note: reason.trim() });
