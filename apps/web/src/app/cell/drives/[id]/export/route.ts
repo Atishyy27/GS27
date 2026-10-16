@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { cellContext, PROFILE_COLS, type PlacementProfile } from "@/components/cell/data";
+import { tnpUnlocked } from "@/lib/tnp";
 
 // CSV of a drive's registrations for the cell (the old "List of Applicants" sheet).
 // RLS returns placement profiles only to the cell of the student's own college.
@@ -12,6 +13,7 @@ const esc = (v: unknown) => {
 };
 
 export async function GET(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await tnpUnlocked())) return new NextResponse("Not found", { status: 404 });
   const { id } = await params;
   const driveId = Number(id);
   const ctx = await cellContext();

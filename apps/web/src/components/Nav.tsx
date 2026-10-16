@@ -1,23 +1,24 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { cellContext } from "@/components/cell/data";
 import CollegeSwitcher from "@/components/CollegeSwitcher";
+import TnpEgg from "@/components/TnpEgg";
 import { isModHere } from "@/components/social/college";
 import { getCollege, listColleges } from "@/lib/college";
+import { TNP_COOKIE } from "@/lib/tnp";
 import { getViewer } from "@/lib/viewer";
 
 const LINKS = [
   { href: "/library", label: "Library" },
   { href: "/feed", label: "Feed" },
   { href: "/g", label: "Groups" },
-  { href: "/drives", label: "Drives" },
   { href: "/jobs", label: "Jobs" },
   { href: "/hall", label: "Hall of Fame" },
   { href: "/placecom", label: "Placecom" },
 ];
 
 export default async function Nav() {
-  const [v, college, colleges, cell, jar] = await Promise.all([getViewer(), getCollege(), listColleges(), cellContext(), cookies()]);
+  const [v, college, colleges, jar] = await Promise.all([getViewer(), getCollege(), listColleges(), cookies()]);
+  const tnp = jar.get(TNP_COOKIE)?.value === "1";
   const guest = !v && jar.get("gs27_guest")?.value === "1";
   const pick = ({ slug, short_name, name }: { slug: string; short_name: string; name: string }) => ({ slug, short_name, name });
   return (
@@ -26,7 +27,7 @@ export default async function Nav() {
         <Link href="/" className="text-lg font-extrabold tracking-tight">GS<span className="text-accent">27</span></Link>
         <div className="flex flex-1 items-center gap-4 overflow-x-auto text-sm text-dim">
           {LINKS.map((l) => <Link key={l.href} href={l.href} className="whitespace-nowrap hover:text-fg">{l.label}</Link>)}
-          {cell.configured && cell.isCell && <Link href="/cell" className="whitespace-nowrap text-accent">Cell</Link>}
+          {tnp && <Link href="/drives" title="T&P suite" className="whitespace-nowrap text-faint hover:text-accent">T&amp;P</Link>}
           {isModHere(v, college) && <Link href="/mod" className="whitespace-nowrap text-accent">Mod</Link>}
         </div>
         <CollegeSwitcher current={pick(college)} colleges={(colleges.length ? colleges : [college]).map(pick)} />
@@ -41,6 +42,7 @@ export default async function Nav() {
           </span>
         )}
       </nav>
+      <TnpEgg unlocked={tnp} />
     </header>
   );
 }
