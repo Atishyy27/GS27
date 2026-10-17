@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import maplibregl, { type Map as MLMap, type MapGeoJSONFeature } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { BRANCHES, SEASON, branchesFor, type Branch } from "@/data/branches";
+import { BRANCHES, branchesFor, type Branch } from "@/data/branches";
 
 const CENTER: [number, number] = [75.87242, 22.72637];
 
@@ -102,7 +102,7 @@ export default function CampusMap() {
         <p className="text-xs font-bold tracking-[0.2em] text-[#ff5a36]">SGSITS INDORE</p>
         <h1 className="mt-2 text-5xl font-extrabold leading-none sm:text-7xl">GS27</h1>
         <p className="mt-3 text-sm text-[#9a9ca6] sm:text-base">
-          Started by the 2027 batch, for every batch after. Tap a department to see how its branch is placing this season.
+          Started by the 2027 batch, for every batch after. Tap a department block to see which branches sit there.
         </p>
       </div>
 
@@ -118,25 +118,11 @@ export default function CampusMap() {
 }
 
 function Stat({ b }: { b: Branch }) {
-  const rate = Math.round((100 * b.clearedAny) / b.registered);
   return (
     <div className="mt-3 rounded-xl border border-white/10 bg-white/5 p-4">
       <div className="flex items-baseline justify-between">
         <span className="text-lg font-bold">{b.code}</span>
         <span className="text-xs text-[#9a9ca6]">{b.name}</span>
-      </div>
-      <div className="mt-3 grid grid-cols-2 gap-3">
-        <div>
-          <div className="text-3xl font-extrabold text-[#ff5a36]">{b.drivesOpen}<span className="text-base text-[#9a9ca6]">/{SEASON.drives}</span></div>
-          <div className="text-xs text-[#9a9ca6]">drives open to this branch</div>
-        </div>
-        <div>
-          <div className="text-3xl font-extrabold text-[#3dd68c]">{rate}%</div>
-          <div className="text-xs text-[#9a9ca6]">of 2027 batch ({b.clearedAny}/{b.registered}) cleared at least one round</div>
-        </div>
-      </div>
-      <div className="mt-3 h-2 overflow-hidden rounded bg-white/10">
-        <div className="h-full bg-[#3dd68c]" style={{ width: `${rate}%` }} />
       </div>
     </div>
   );
@@ -152,7 +138,6 @@ function BuildingCard({ pick, onClose }: { pick: NonNullable<Pick>; onClose: () 
       {pick.branches.length ? pick.branches.map((b) => <Stat key={b.code} b={b} />) : (
         <p className="mt-2 text-sm text-[#9a9ca6]">Not a department building. Try one of the orange blocks.</p>
       )}
-      <p className="mt-3 text-[11px] text-[#6b6f7b]">Source: T&amp;P cell sheets, {SEASON.asOf}. Rounds cleared are stage results, not final offers.</p>
     </div>
   );
 }
@@ -160,9 +145,7 @@ function BuildingCard({ pick, onClose }: { pick: NonNullable<Pick>; onClose: () 
 function BranchList({ onPick }: { onPick: (b: Branch) => void }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-[#0e0f13]/85 p-4 backdrop-blur">
-      <p className="text-xs text-[#9a9ca6]">
-        Season so far: <b className="text-white">{SEASON.drives}</b> drives, median CTC <b className="text-white">{SEASON.medianCtcLpa} LPA</b> ({SEASON.ctcN} drives state one)
-      </p>
+      <p className="text-xs text-[#9a9ca6]">Departments on campus. Tap one to find it on the map.</p>
       <div className="mt-3 flex flex-wrap gap-2">
         {BRANCHES.map((b) => (
           <button key={b.code} onClick={() => onPick(b)}

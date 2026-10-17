@@ -10,7 +10,7 @@ Rule: big pieces are reviewed one at a time with Atishay before they are built. 
 | 2 | Library with subjects shared across colleges | Not commented; built |
 | 3 | Feed, groups, posts, profiles | Not commented; built |
 | 4 | Moderation | Not commented; built |
-| 5 | Placecom dashboard and game | Only for the 16 Oct session; no more work |
+| 5 | Placecom dashboard and game | Only for the 16 Oct session; removed from GS27 on 17 Oct (see below) |
 | 6 | Hall of Fame | Approved; he adds his friends' top projects |
 | 7 | Multi-college and college switcher | Not commented; built |
 | 8 | AMAs, pitch pages, pricing, college requests, platform admin | Dropped for now; code kept on branch `parked-ama-growth` |
@@ -34,6 +34,21 @@ One suite for the cell, built from how the cell really works. Source of truth: t
   suite as the student-side upload plus the three-layer check by coordinators.
 - Open decisions: which sheet type first; import from the existing Google Sheets (bridge) or replace them;
   which cell role gets what.
+
+## Done 17 Oct 2026: GS27 carries no placement statistics
+
+His instruction of 16 Oct, now executed. Deleted: `src/app/placecom` (dashboard and game),
+`src/components/placecom`, `src/data/season-2026-27.ts`. `src/data/branches.ts` keeps branch names and the
+building mapping only; the drive counts, registered and cleared figures are gone. `CampusMap.tsx` no longer
+shows a placement card, a season strip or a cell-sheet source line. The Placecom nav link is gone. The chart
+primitives moved to `src/components/Charts.tsx` because the T&P console still uses them.
+
+Untouched on purpose: `/cell/stats` (reads the live database behind the "tnp" easter egg, not this data) and
+the anonymous group `/g/placecom` (holds no numbers). The game page is deleted, not rebuilt; rebuilding it
+without numbers would be a new piece and needs his review first.
+
+Still live with the old numbers until someone redeploys:
+`cd apps/web && npx vercel deploy --prod --yes`.
 
 ### Other open items
 - 3D campus home: owned by a separate chat (`cnc/handoffs/gs27-3d-campus/PROMPT.md`).

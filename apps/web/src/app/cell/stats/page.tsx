@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card, Columns, HBars, Stat } from "@/components/placecom/Charts";
+import { Card, Columns, HBars, Stat } from "@/components/Charts";
 import { cellContext } from "@/components/cell/data";
 import Gate, { CellTabs, NOT_CONFIGURED } from "@/components/cell/Gate";
 

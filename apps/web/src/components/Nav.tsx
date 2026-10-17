@@ -13,7 +13,6 @@ const LINKS = [
   { href: "/g", label: "Groups" },
   { href: "/jobs", label: "Jobs" },
   { href: "/hall", label: "Hall of Fame" },
-  { href: "/placecom", label: "Placecom" },
 ];
 
 export default async function Nav() {
