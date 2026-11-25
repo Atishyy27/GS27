@@ -10,6 +10,7 @@ import VoteButtons from "@/components/shared/VoteButtons";
 import ReportButton from "@/components/shared/ReportButton";
 import NotConfigured from "@/components/library/NotConfigured";
 import UploadForm from "@/components/library/UploadForm";
+import PastQuestions from "./PastQuestions";
 
 type Resource = {
   id: number; kind: string; title: string; description: string | null; file_path: string | null; url: string | null;
@@ -143,6 +144,8 @@ export default async function SubjectPage({ params, searchParams }: {
         ))}
         {shown.length === 0 && <li className="text-sm text-dim">Nothing here yet. Be the first to add one.</li>}
       </ul>
+
+      <PastQuestions subjectId={id} />
     </main>
   );
 }
