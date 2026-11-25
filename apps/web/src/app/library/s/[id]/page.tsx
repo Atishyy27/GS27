@@ -13,6 +13,7 @@ import UploadForm from "@/components/library/UploadForm";
 import StudySite from "@/components/library/StudySite";
 import { studySiteFor } from "@/data/study-sites";
 import PastQuestions from "./PastQuestions";
+import SyllabusSection from "./SyllabusSection";
 
 type Resource = {
   id: number; kind: string; title: string; description: string | null; file_path: string | null; url: string | null;
@@ -87,6 +88,7 @@ export default async function SubjectPage({ params, searchParams }: {
       </div>
 
       {studySite && <StudySite site={studySite} />}
+      <SyllabusSection codes={hereCodes.filter((c): c is string => Boolean(c))} collegeId={college.id} />
 
       <div className="mt-6">
         {onboarded ? <UploadForm subjectId={id} userId={v!.userId} /> : (
