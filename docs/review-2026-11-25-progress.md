@@ -6,3 +6,9 @@
 2026-11-25 | step 3 product pass | DONE | frame check on both study sites (200, no X-Frame-Options, no CSP, 0 frame-buster hits); SGSITS source research (old PDF paths soft-404, Wayback snapshots exist); 4 references; indoripohe read (3 readings)
 2026-11-25 | step 4 plan | DONE | docs/review-2026-11-25.md committed locally
 2026-11-25 | push | HELD | Vercel Preview integration would build any pushed branch (2 prior revamp previews failed); run rule 8 says do not push if anything would deploy; reported to caller
+2026-11-26 | go received | C1-C4 | push allowed, preview accepted; C5 not built
+2026-11-26 | C1 | DONE | next 16.4.6; CI 45692186435 green (lint, typecheck, 35/35 tests, next build, playwright); Vercel preview still failing, cause unread
+2026-11-26 | C2 | DONE | 4 insert policies pinned, solutions admin-only; generator moved (no personal data); hash compare in doc 12.2
+2026-11-26 | C3 | DONE | study sites embedded; live frame check passes in CI for both sites
+2026-11-26 | C4 | DONE | 10 Mechanical subjects from the Archive copy of the 2023-24 PDF, read from page images; table in doc 12.4
+2026-11-26 | push | DONE | review/2026-11-25 pushed to origin
