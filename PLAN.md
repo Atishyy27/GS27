@@ -54,3 +54,75 @@ Still live with the old numbers until someone redeploys:
 - 3D campus home: owned by a separate chat (`cnc/handoffs/gs27-3d-campus/PROMPT.md`).
 - Going live: Supabase project and Google sign-in per `apps/web/SETUP.md`, then Vercel.
 - Earlier seasons' data: needs the TPO's 2024-25 and 2025-26 Company Information sheets shared.
+
+## Direction, 17 Nov 2026 (his call)
+
+USP first: academic sourcing. A student types a subject code (for example ME46018) and gets every past paper,
+note, the official syllabus and the exam date, for every branch and year, readable without login.
+The issue he acknowledged: the revamp built feed, groups, profiles, moderation, T&P and recruiter pieces while the
+USP was ignored. Those pieces stay (his intent: they are needed later), but every one hangs off the subject page:
+- feed -> discussion on a subject; groups -> one per subject and semester; profiles/badges -> who uploaded good
+  material; Hall of Fame -> projects linked to subjects; moderation -> uploads first.
+- T&P console and recruiter side come last, once students come back every week.
+Unlock rule: a parked feature turns on only when the USP passes a usage bar he sets (weekly readers, uploads).
+Survive graduation: content and an upload path that 2-3 juniors can maintain.
+Measure weekly: readers, searches with no result (the missing-paper list), uploads.
+Before any UI: pull 3-5 real student-resource references (his P0 rule). Build starts after end-sems (12 Dec).
+
+## Decisions, 18 Nov 2026 (his call, after the ME46018 paper)
+
+- Contributors: any signed-in student can add papers, notes and solutions. Moderators are not appointed: the top [x]% of contributors by reputation become moderators (x to be set).
+- Coverage: every subject of every year and branch. The viewer's own semester subjects show by default (he is Mechanical, 7th sem).
+- Ingestion: syllabus and past papers pulled in by web scraping where public; students fill the gaps by upload.
+- Flagship next piece: a PYQ upload + parser engine (photo/PDF of a paper -> structured questions with Q/part/marks/unit -> repeat links to older questions), human-confirmed before publish.
+- Seed and data model: the ME46018 study site (cnc/college/auto/packs/ME46018 + site/) is the prototype for the subject page; its pack format becomes the DB tables. Build still starts after end-sems (12 Dec).
+
+## Scope v2, 18 Nov 2026 (his calls; plan only, no build and no token spend until the full plan is ready)
+
+Roles
+- Guest: read. Student (signed in): add papers, notes, solutions, suggest better answers, vote.
+- Moderator: in-app UI only. Earned (top x% reputation), scoped to a branch; branch confirmed via enrollment number.
+- Admin (above moderators): may run bulk pipelines with Claude Code (local agents) for ingestion and audits; never shipped to users.
+
+Content ladder (value order): 1 syllabus (current + past versions) -> 2 basic notes per subject -> 3 PYQs -> 4 PYQ solutions.
+Scale target: all SGSITS subjects, all years and branches (about 10 branches x about 40 subjects = about 400 subjects). Viewer's own semester shown by default.
+
+Ingestion
+- Syllabus and scheme: scraped from public SGSITS sources (check terms first), formatted per subject, versioned by year.
+- PYQ upload + parser: photo/PDF -> pdf.js text or Tesseract.js OCR -> rule-based split (Q1-Q5, (a)-(e), [marks], Or) -> header (subject, code, exam, year, paper code) -> confirm screen -> moderation.
+- Repeat detection: in-browser embeddings (transformers.js, small sentence model) + text similarity; suggestions only, student confirms. No server model needed.
+
+Answers
+- One canonical answer per question. "Suggest a better answer": written by hand or generated, voted, a moderator swaps it in. Old versions kept.
+- BYOK: a student pastes their own AI key (Gemini, Claude, OpenAI, Grok) in settings; generation runs in their browser; the key stays on their device and never reaches GS27. GS27 pays nothing (P-2).
+- Editor: markdown + LaTeX with live KaTeX preview (math input widget optional).
+
+Safety
+- Edits to existing content never overwrite: every change is a new version, needs approval when it touches published content, one-click revert. Vandalism ("override") is P0.
+- Feed, upvote/downvote stay on the side of the subject page, not the centre.
+- Entry: the 3D campus homepage leads into the subject page.
+
+## Scope v3, 18 Nov 2026 (his calls; plan only)
+
+Auth and roles
+- Guest: read everything, write nothing.
+- Student sign-in, two ways: (a) Google/Gmail; (b) enrollment ID + OTP sent to the student's college email (domain to confirm, e.g. @sgsits.ac.in). Without the OTP anyone could type someone else's enrollment ID. The enrollment ID gives branch and year, so (b) marks the profile verified.
+- Moderator: a student who contributes repeatedly (reputation). Admin: Atishay for now; more admins later.
+- Candidate for the OTP: Supabase Auth email OTP, restricted to the college domain (free tier, no extra service); confirm send limits before launch.
+
+Contribution
+- No Google Form shown to users and no "share your Drive with me": GS27's own upload form (syllabus, notes, PYQ photo/PDF, solutions, assignments).
+- Storage to decide: Supabase Storage (free tier, about 1 GB) vs a GS27-owned Google Drive via API (more space, more setup).
+- Also: assignment sharing, and "submit the paper after the exam" (upload right after each end-sem, feeds the parser).
+- Answers: BYOK generation, LaTeX editor, one canonical answer + suggest-better (from v2).
+
+Engagement and GTM
+- 3D campus homepage plus a small game on it.
+- GTM idea A: email every student via the enrollment pattern (0801xx2x10xx -> college email). Needs checks before use: college permission and spam rules (bulk mail from a personal account gets blocked and can get the sender flagged); send in small batches or through class reps; sending is his hand only.
+- GTM idea B: partner with friends who run an existing university platform.
+
+## Idea, 22 Nov 2026 (his ask during FEA prep): group study
+
+- A shared study room per subject: friends join by link, everyone sees the same pomodoro timer (25/5) and who is in focus or on break.
+- Shared checklist of the subject's starred PYQs: each person ticks what they have written by hand; the room shows "done by 3 of 5".
+- Prototype already exists: the solo pomodoro timer and PYQ ticks on the ME46020 study site (cnc/college/auto/site/assets/timer.js). Group version needs realtime state (Supabase Realtime channel per room). Not built; plan only, build after end-sems.

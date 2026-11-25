@@ -10,6 +10,10 @@ import VoteButtons from "@/components/shared/VoteButtons";
 import ReportButton from "@/components/shared/ReportButton";
 import NotConfigured from "@/components/library/NotConfigured";
 import UploadForm from "@/components/library/UploadForm";
+import StudySite from "@/components/library/StudySite";
+import { studySiteFor } from "@/data/study-sites";
+import PastQuestions from "./PastQuestions";
+import SyllabusSection from "./SyllabusSection";
 
 type Resource = {
   id: number; kind: string; title: string; description: string | null; file_path: string | null; url: string | null;
@@ -38,6 +42,8 @@ export default async function SubjectPage({ params, searchParams }: {
   const short = new Map(colleges.map((c) => [c.id, c.short_name]));
   const offerings = (offs ?? []).slice().sort((a, b) => Number(b.college_id === college.id) - Number(a.college_id === college.id));
   const here = offerings.find((o) => o.college_id === college.id);
+  const hereCodes = offerings.filter((o) => o.college_id === college.id).map((o) => o.code as string | null);
+  const studySite = studySiteFor(hereCodes);
   const onboarded = Boolean(v?.profile?.branch && v?.profile?.batch && v?.profile?.college_id);
   const myCollegeOnly = scope === "mine";
 
@@ -80,6 +86,9 @@ export default async function SubjectPage({ params, searchParams }: {
           </span>
         )) : <span className="text-xs text-faint">no college lists it yet</span>}
       </div>
+
+      {studySite && <StudySite site={studySite} />}
+      <SyllabusSection codes={hereCodes.filter((c): c is string => Boolean(c))} collegeId={college.id} />
 
       <div className="mt-6">
         {onboarded ? <UploadForm subjectId={id} userId={v!.userId} /> : (
@@ -143,6 +152,8 @@ export default async function SubjectPage({ params, searchParams }: {
         ))}
         {shown.length === 0 && <li className="text-sm text-dim">Nothing here yet. Be the first to add one.</li>}
       </ul>
+
+      <PastQuestions subjectId={id} />
     </main>
   );
 }
