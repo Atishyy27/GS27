@@ -31,7 +31,7 @@ for (const size of sizes) {
       await page.getByText("Study here").click();
       await expect(page.locator("iframe")).toHaveAttribute("src", "https://me46018-x7k2q.vercel.app");
       await expect(page.frameLocator("iframe").getByText("Stub study site")).toBeVisible();
-      await expect(page.getByLabel("Syllabus").getByText("Unit 5")).toBeVisible();
+      await expect(page.getByLabel("Syllabus").getByText("Unit 5", { exact: true })).toBeVisible();
       await expect(page.getByText("Repeat x2").first()).toBeVisible();
       await expect(page.getByText("must never show")).toHaveCount(0);
       expect(await noSideScroll(page)).toBe(true);
@@ -67,7 +67,7 @@ for (const size of sizes) {
 
 test("slow response still renders", async ({ page }) => {
   await page.goto("/mock/subject/ME46018?mode=slow");
-  await expect(page.getByLabel("Syllabus").getByText("Unit 1")).toBeVisible();
+  await expect(page.getByLabel("Syllabus").getByText("Unit 1", { exact: true })).toBeVisible();
 });
 
 test("frame off: link card only", async ({ page }) => {
